@@ -1,0 +1,15 @@
+﻿.feature_item {
+    width: 25%;
+    text-align: center;
+}
+
+.feature__title {
+    text-transform: uppercase;
+    font-size: 1.6rem;
+    color: #698f3f;
+}
+
+.feature__text {
+    font-size: 1.6rem;
+    color: #3a3e3b;
+}

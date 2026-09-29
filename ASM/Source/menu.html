@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Thực đơn chi tiết tại Tea Station - Hơn 100 hương vị trà đặc sắc được chọn lọc từ tâm huyết.">
+  <title>Thực Đơn Chi Tiết | Tea Station</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/logo.png">
+  
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Main Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .page-hero {
+      background: linear-gradient(rgba(10, 14, 9, 0.7), rgba(15, 20, 14, 0.75)),
+                  url('images/hero-bg.jpg') center/cover no-repeat;
+      padding: 8rem 0 4.5rem;
+      text-align: center;
+      color: #ffffff;
+    }
+    .page-hero h1 {
+      font-size: 3.2rem;
+      letter-spacing: 3px;
+      margin-bottom: 0.8rem;
+    }
+    .breadcrumbs {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      font-size: 0.95rem;
+      color: #e0d8c8;
+      list-style: none;
+    }
+    .breadcrumbs a {
+      color: var(--gold-light);
+    }
+    .breadcrumbs a:hover {
+      text-decoration: underline;
+    }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+    @media (max-width: 992px) {
+      .menu-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .menu-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Topbar Controls -->
+  <div class="nav-controls">
+    <button id="nav-btn" class="nav-btn" aria-label="Mở Menu điều hướng" title="Menu">
+      <div class="nav-btn-icon">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </button>
+
+    <button id="theme-toggle-btn" class="theme-toggle-btn" aria-label="Chuyển chế độ giao diện" title="Chuyển Dark/Light Mode">
+      <i class="fas fa-moon"></i>
+    </button>
+
+    <button id="cart-toggle-btn" class="cart-toggle-btn" aria-label="Mở giỏ hàng" title="Giỏ hàng">
+      <i class="fas fa-shopping-bag"></i>
+      <span id="cart-badge" class="cart-badge">0</span>
+    </button>
+  </div>
+
+  <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+  <!-- Thanh Sidebar -->
+  <aside id="sidebar" class="sidebar">
+    <button id="sidebar-close" class="sidebar-close" aria-label="Đóng thanh điều hướng">&times;</button>
+    <div>
+      <div class="sidebar-brand">
+        <img src="images/logo.png" alt="Tea Station Logo">
+        <h3>TEA STATION</h3>
+      </div>
+      <nav>
+        <ul class="sidebar-links">
+          <li><a href="index.html#home"><i class="fas fa-home"></i> Trang Chủ</a></li>
+          <li><a href="index.html#features"><i class="fas fa-star"></i> Đặc Điểm</a></li>
+          <li><a href="index.html#about"><i class="fas fa-leaf"></i> Về Chúng Tôi</a></li>
+          <li><a href="index.html#products"><i class="fas fa-mug-hot"></i> Sản Phẩm</a></li>
+          <li><a href="index.html#services"><i class="fas fa-concierge-bell"></i> Dịch Vụ</a></li>
+          <li><a href="index.html#menu-table"><i class="fas fa-table"></i> Bảng Menu</a></li>
+          <li><a href="index.html#contact"><i class="fas fa-envelope"></i> Liên Hệ</a></li>
+          <li><a href="menu.html" class="active"><i class="fas fa-book-open"></i> Xem Thực Đơn Chi Tiết</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="sidebar-footer">
+      <ul class="sidebar-socials">
+        <li><a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+        <li><a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a></li>
+        <li><a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <!-- Shopping Cart Drawer -->
+  <div id="cart-drawer" class="cart-drawer">
+    <div class="cart-header">
+      <h3><i class="fas fa-shopping-bag" style="color:var(--primary);"></i> Giỏ Hàng Của Bạn</h3>
+      <button id="cart-close-btn" class="cart-close-btn" aria-label="Đóng giỏ hàng">&times;</button>
+    </div>
+    <div id="cart-items-body" class="cart-items-body"></div>
+    <div class="cart-footer">
+      <div class="cart-total-row">
+        <span>Tổng thanh toán:</span>
+        <span id="cart-total-price" class="cart-total-price">$0.00</span>
+      </div>
+      <button id="checkout-btn" class="btn btn-primary" style="width: 100%; border-radius: 8px;">
+        <i class="fas fa-credit-card"></i> TIẾN HÀNH ĐẶT HÀNG
+      </button>
+    </div>
+  </div>
+
+  <!-- Page Banner -->
+  <header class="page-hero">
+    <div class="container">
+      <span class="script-subheading" style="color: var(--gold-light);">Our Exquisite Selection</span>
+      <h1>THỰC ĐƠN TRÀ THƯỢNG HẠNG</h1>
+      <ul class="breadcrumbs">
+        <li><a href="index.html">Trang Chủ</a></li>
+        <li>/</li>
+        <li>Thực Đơn Trà</li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="section-padding">
+    <div class="container">
+
+      <!-- Bảng giá đầy đủ (Y1: Table) -->
+      <div style="text-align: center;">
+        <span class="script-subheading">Full Price List</span>
+        <h2 class="section-title">BẢNG GIÁ VÀ CHI TIẾT CÁC SIZE</h2>
+        <p>Tất cả sản phẩm đều được làm từ búp trà tươi hữu cơ chuẩn hóa quy trình pha chế</p>
+      </div>
+
+      <!-- Tìm kiếm bảng -->
+      <div class="table-toolbar">
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" id="table-search-input" placeholder="Tìm kiếm món trà theo tên, vị, phân loại...">
+        </div>
+      </div>
+
+      <div class="table-wrapper" style="margin-bottom: 4.5rem;">
+        <table class="tea-table">
+          <thead>
+            <tr>
+              <th>Mã</th>
+              <th>Tên Món Trà</th>
+              <th>Hương Vị / Thành Phần</th>
+              <th>Size Vừa (M)</th>
+              <th>Size Lớn (L)</th>
+              <th>Trạng Thái</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>TS-01</td>
+              <td><strong>Black Long Tea (Cổ Điển)</strong></td>
+              <td>Lá trà đen Tây Tạng, mật ong rừng, quế vỏ</td>
+              <td>$ 8.99</td>
+              <td><strong>$ 9.99</strong></td>
+              <td><span class="badge-tag badge-black">Bán Chạy</span></td>
+            </tr>
+            <tr>
+              <td>TS-02</td>
+              <td><strong>Green Tea Jasmine (Hoa Nhài)</strong></td>
+              <td>Búp trà xanh Thái Nguyên, cánh hoa nhài tươi</td>
+              <td>$ 3.99</td>
+              <td><strong>$ 4.99</strong></td>
+              <td><span class="badge-tag badge-green">Tươi Mát</span></td>
+            </tr>
+            <tr>
+              <td>TS-03</td>
+              <td><strong>Citrus Herbal Tea (Cam Quế)</strong></td>
+              <td>Trà thảo mộc, lát cam vàng sấy khô, hoa hồi</td>
+              <td>$ 5.99</td>
+              <td><strong>$ 6.99</strong></td>
+              <td><span class="badge-tag badge-special">Thanh Nhiệt</span></td>
+            </tr>
+            <tr>
+              <td>TS-04</td>
+              <td><strong>Royal Ceylon Milk Tea (Trà Sữa)</strong></td>
+              <td>Hồng trà Ceylon, sữa bò New Zealand nguyên kem</td>
+              <td>$ 4.99</td>
+              <td><strong>$ 5.99</strong></td>
+              <td><span class="badge-tag badge-black">Yêu Thích</span></td>
+            </tr>
+            <tr>
+              <td>TS-05</td>
+              <td><strong>Oolong Mountain Roasted</strong></td>
+              <td>Trà ô long sao lửa than hoa đào, vị ngọt hậu sâu</td>
+              <td>$ 7.50</td>
+              <td><strong>$ 8.50</strong></td>
+              <td><span class="badge-tag badge-green">Đặc Biệt</span></td>
+            </tr>
+            <tr>
+              <td>TS-06</td>
+              <td><strong>Chamomile Honey Infusion</strong></td>
+              <td>Cúc la mã hữu cơ, kỷ tử, táo đỏ, mật hoa</td>
+              <td>$ 6.50</td>
+              <td><strong>$ 7.50</strong></td>
+              <td><span class="badge-tag badge-special">Giúp Ngủ Ngon</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Danh Sách Sản Phẩm Dạng Card Grid -->
+      <div style="text-align: center; margin-bottom: 2.5rem;">
+        <span class="script-subheading">Handcrafted</span>
+        <h2 class="section-title">HÌNH ẢNH MÓN UỐNG NỔI BẬT</h2>
+      </div>
+
+      <div class="menu-grid">
+        <!-- Item 1 -->
+        <article class="product-card">
+          <div class="product-img-wrapper">
+            <img src="images/product-1.jpg" alt="Black Long Tea">
+            <button class="product-lightbox-btn lightbox-trigger" title="Xem chi tiết ảnh"><i class="fas fa-search-plus"></i></button>
+          </div>
+          <div class="product-details">
+            <div>
+              <div class="product-price-row">
+                <h4>BLACK LONG TEA</h4>
+                <div class="product-rating"><i class="fas fa-star"></i> 4.9</div>
+              </div>
+              <span class="product-price">$9.99</span>
+              <p>Trà đen truyền thống với nước trà đỏ đậm óng ánh, tỏa hương ấm áp.</p>
+            </div>
+            <div class="card-btns">
+              <button class="add-to-cart-btn"><i class="fas fa-cart-plus"></i> THÊM VÀO GIỎ</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Item 2 -->
+        <article class="product-card">
+          <div class="product-img-wrapper">
+            <img src="images/product-2.jpg" alt="Green Tea Jasmine">
+            <button class="product-lightbox-btn lightbox-trigger" title="Xem chi tiết ảnh"><i class="fas fa-search-plus"></i></button>
+          </div>
+          <div class="product-details">
+            <div>
+              <div class="product-price-row">
+                <h4>GREEN TEA JASMINE</h4>
+                <div class="product-rating"><i class="fas fa-star"></i> 5.0</div>
+              </div>
+              <span class="product-price">$4.99</span>
+              <p>Trà xanh hoa nhài thuần khiết giải tỏa căng thẳng sau một ngày dài.</p>
+            </div>
+            <div class="card-btns">
+              <button class="add-to-cart-btn"><i class="fas fa-cart-plus"></i> THÊM VÀO GIỎ</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Item 3 -->
+        <article class="product-card">
+          <div class="product-img-wrapper">
+            <img src="images/product-3.jpg" alt="Citrus Herbal Tea">
+            <button class="product-lightbox-btn lightbox-trigger" title="Xem chi tiết ảnh"><i class="fas fa-search-plus"></i></button>
+          </div>
+          <div class="product-details">
+            <div>
+              <div class="product-price-row">
+                <h4>CITRUS HERBAL TEA</h4>
+                <div class="product-rating"><i class="fas fa-star"></i> 4.8</div>
+              </div>
+              <span class="product-price">$6.99</span>
+              <p>Sự kết hợp bùng nổ của hoa quả tự nhiên mang đến nguồn năng lượng tràn đầy.</p>
+            </div>
+            <div class="card-btns">
+              <button class="add-to-cart-btn"><i class="fas fa-cart-plus"></i> THÊM VÀO GIỎ</button>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div style="text-align: center; margin-top: 4rem;">
+        <a href="index.html#home" class="btn btn-primary"><i class="fas fa-arrow-left"></i> QUAY VỀ TRANG CHỦ</a>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-brand">
+        <img src="images/logo.png" alt="Logo">
+        <h3>TEA STATION</h3>
+      </div>
+      <ul class="footer-socials">
+        <li><a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+        <li><a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a></li>
+        <li><a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a></li>
+      </ul>
+      <p class="footer-copyright">&copy; 2026 TEA STATION. ALL RIGHTS RESERVED. ASSIGNMENT FPT POLYTECHNIC.</p>
+    </div>
+  </footer>
+
+  <!-- Lightbox Modal -->
+  <div id="lightbox-modal" class="lightbox-modal" role="dialog" aria-modal="true">
+    <div class="lightbox-content">
+      <button id="lightbox-close" class="lightbox-close" aria-label="Đóng">&times;</button>
+      <img id="lightbox-img" src="" alt="Hình ảnh phóng to">
+      <p id="lightbox-caption" class="lightbox-caption"></p>
+    </div>
+  </div>
+
+  <!-- Nút cuộn lên đầu trang -->
+  <button id="back-to-top" class="back-to-top" title="Lên đầu trang" aria-label="Lên đầu trang">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <!-- Toast -->
+  <div id="toast-notice" class="toast-notice">
+    <i class="fas fa-check-circle" style="font-size: 1.3rem;"></i>
+    <span class="toast-text">Thông báo</span>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

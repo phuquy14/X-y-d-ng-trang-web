@@ -1,0 +1,256 @@
+@import url("https://fonts.googleapis.com/css?family=Catamaran:400,700|Grand+Hotel");
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Catamaran", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* =========================================
+   MÀN HÌNH 1: ỨNG DỤNG PADDING, BORDER
+   ========================================= */
+
+.nav {
+  border: 1px solid red;
+  padding: 10rem 5rem;
+  width: 30rem;
+  background-color: #e5e5e5;
+}
+
+.nav__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav__link {
+  font-family: "Catamaran", sans-serif;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size: 2.4rem;
+  font-weight: 700;
+  letter-spacing: calc(00.7rem - 0.4rem);
+  color: #3a3e3b;
+}
+
+/* =========================================
+   MÀN HÌNH 2: ỨNG DỤNG BACKGROUND IMAGE, PADDING
+   ========================================= */
+
+.header {
+  background-image: url('./images/about-bcg.jpeg');
+  background-size: cover;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.header h2 {
+  font-family: "Grand Hotel", cursive;
+  font-size: 3rem;
+  color: #698f3f;
+  letter-spacing: calc(00.7rem * 1.2);
+  margin-top: 0;
+  padding-top: 15rem;
+}
+
+.header h1 {
+  font-family: "Catamaran", sans-serif;
+  text-transform: uppercase;
+  color: #fff;
+  font-size: 6rem;
+  letter-spacing: 0.7rem;
+}
+
+.header__btn {
+  font-size: 1.6rem;
+  padding: 2rem 3rem;
+}
+
+/* =========================================
+   MÀN HÌNH 3: ỨNG DỤNG BOX MODEL, PADDING
+   ========================================= */
+
+#features {
+  /* background-color: aquamarine; */
+}
+
+.feature_item {
+  width: 25%;
+  padding: 3rem 25%;
+  border: 1px solid red;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.feature__title {
+  text-transform: uppercase;
+  font-size: 1.6rem;
+  letter-spacing: calc(0.7rem - 0.2rem);
+  color: #698f3f;
+}
+
+.feature__text {
+  font-size: 1.6rem;
+  color: #3a3e3b;
+}
+
+/* =========================================
+   MÀN HÌNH 4: ỨNG DỤNG BOXMODEL, BORDER-RADIUS, BACKGROUND-COLOR
+   ========================================= */
+
+.about_left,
+.about_right {
+  width: 50%;
+  box-sizing: border-box;
+}
+
+.about_left {
+  border: 7px solid #698f3f;
+  border-radius: 22px;
+  background-color: #698f3f;
+}
+
+.heading_first {
+  font-family: "Grand Hotel", cursive;
+  font-size: 3rem;
+  color: #698f3f;
+  letter-spacing: calc(00.7rem * 1.2);
+}
+
+.heading_second {
+  font-size: 3.4rem;
+  text-transform: uppercase;
+  color: #3a3e3b;
+}
+
+.heading_second--white {
+  color: #fff;
+}
+
+.about__text {
+  font-size: 1.8rem;
+}
+
+/* =========================================
+   MÀN HÌNH 5: ỨNG DỤNG BOX MODEL, MARGIN, PADDING, BORDER, BORDER RADIUS
+   ========================================= */
+
+#product {
+  background-color: #3a3e3b;
+}
+
+.product_item {
+  width: 30%;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  border: 1px solid red;
+  border-bottom: 5px solid #698f3f;
+  box-sizing: border-box;
+}
+
+.product__img {
+  border-radius: 22px;
+}
+
+.products__text {
+  color: #fff;
+  font-size: 1.8rem;
+}
+
+.product-item__title {
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 2rem;
+  letter-spacing: calc(00.7rem - 0.3rem);
+  margin: 2rem 0;
+}
+
+.product-item__price {
+  font-family: "Grand Hotel", cursive;
+  font-size: 2.6rem;
+  color: #698f3f;
+  font-weight: 700;
+}
+
+.product-item__price span {
+  margin-right: 1rem;
+  font-size: 3rem;
+  font-weight: 400;
+}
+
+/* =========================================
+   MÀN HÌNH 6: ỨNG DỤNG BOX MODEL, MARGIN, PADDING, BORDER, OUTLINE TẠO BUTTON
+   ========================================= */
+
+.btn {
+  color: #3a3e3b;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size: 1.4rem;
+  font-weight: 700;
+  background-color: #698f3f;
+  outline: 3px solid #698f3f;
+  outline-offset: 4px;
+  padding: 1rem 1rem;
+  letter-spacing: calc(00.7rem - 0.5rem);
+  display: inline-block;
+  cursor: pointer;
+  border: none;
+}
+
+.btn:hover {
+  color: #e5e5e5;
+}
+
+/* =========================================
+   CONTACT
+   ========================================= */
+
+.contact {
+  background: #f1f5f8;
+}
+
+.contact-info,
+.contact-form {
+  width: 50%;
+  box-sizing: border-box;
+}
+
+.contact-info {
+  text-transform: uppercase;
+  font-size: 1.8rem;
+}
+
+.contact-form {
+  background: #fff;
+  text-align: center;
+}
+
+.contact-form h3 {
+  color: #617d98;
+}
+
+.form-control {
+  width: 100%;
+  background: #f1f5f8;
+  text-transform: uppercase;
+  letter-spacing: 0.7rem;
+  box-sizing: border-box;
+}
+
+.form-control::placeholder {
+  font-family: "Catamaran", sans-serif;
+  color: #102a42;
+  text-transform: uppercase;
+  letter-spacing: 0.7rem;
+}
+
+.submit-btn {
+  width: 100%;
+}

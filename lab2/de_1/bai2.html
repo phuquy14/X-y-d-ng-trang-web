@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 2: Form đăng ký</title>
+</head>
+<body>
+
+    <form action="" method="post" enctype="multipart/form-data">
+        HỌ VÀ TÊN:<br>
+        <input type="text" name="fullname" size="40"><br><br>
+
+        GIỚI TÍNH:
+        <input type="radio" name="gender" value="nam" checked> Nam
+        <input type="radio" name="gender" value="nu"> Nữ<br><br>
+
+        HÌNH ẢNH:<br>
+        <input type="file" name="photo"><br><br>
+
+        QUỐC TỊCH:<br>
+        <select name="country">
+            <option value="us">United States</option>
+            <option value="vn" selected>Việt Nam</option>
+            <option value="vn" selected>Thái Lan</option>
+            <option value="vn" selected>Campuchia</option>
+        </select><br><br>
+
+        SỞ THÍCH:<br>
+        <input type="checkbox" name="hobby" value="thethao"> THỂ THAO
+        <input type="checkbox" name="hobby" value="dulich" checked> DU LỊCH
+        <input type="checkbox" name="hobby" value="amnhac"> ÂM NHẠC
+        <input type="checkbox" name="hobby" value="amthuc"> ẨM THỰC<br><br>
+
+        GHI CHÚ:<br>
+        <textarea name="notes" rows="6" cols="45"></textarea><br><br>
+
+        <input type="submit" value="Đăng ký">
+        <input type="reset" value="Nhập lại">
+    </form>
+
+</body>
+</html>

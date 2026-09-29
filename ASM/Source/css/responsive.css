@@ -1,0 +1,205 @@
+/* ==========================================================================
+   TEA STATION - ULTRA PRO RESPONSIVE STYLESHEET (Y4)
+   Đáp ứng hoàn hảo trên Desktop, Laptop, Tablet, Mobile
+   ========================================================================== */
+
+/* Laptop & Tablet Lớn (Dưới 1100px) */
+@media screen and (max-width: 1100px) {
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+  }
+
+  .about-wrapper {
+    gap: 35px;
+  }
+
+  .about-content-box {
+    padding: 3rem 2.5rem;
+  }
+
+  .products-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .products-info {
+    position: static;
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Tablet & Mobile Ngang (Dưới 768px - Mockup chuẩn Assignment.pdf) */
+@media screen and (max-width: 768px) {
+  .hero-title {
+    font-size: 2.6rem;
+    letter-spacing: 2px;
+  }
+
+  .hero-subtitle {
+    font-size: 2.2rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .script-subheading {
+    font-size: 1.9rem;
+  }
+
+  /* Nav Controls nổi góc trên bên trái */
+  .nav-controls {
+    top: 15px;
+    left: 15px;
+    gap: 8px;
+  }
+
+  .nav-btn, .theme-toggle-btn, .cart-toggle-btn {
+    width: 42px;
+    height: 42px;
+    font-size: 1rem;
+  }
+
+  /* Features 1 cột dọc chuẩn ảnh mẫu */
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  /* About 2 khối xếp tầng: ảnh trên, khối xanh dưới */
+  .about-wrapper {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .about-img-box img {
+    height: 350px;
+  }
+
+  .about-content-box {
+    padding: 2.5rem 1.8rem;
+  }
+
+  /* Products slider: mỗi lần 1 card */
+  .product-card {
+    min-width: 100%;
+  }
+
+  /* Services 1 cột dọc chuẩn ảnh mẫu */
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  /* Contact xếp dọc: thông tin trên, form dưới */
+  .contact-wrapper {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+
+  .contact-info {
+    padding-right: 0;
+  }
+
+  .contact-form-box {
+    padding: 2.5rem 1.6rem;
+  }
+
+  /* Map container & Header */
+  .map-header-bar {
+    padding: 14px 16px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .map-switch-tabs {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .map-container {
+    height: 400px;
+  }
+
+  .map-floating-card {
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    max-width: none;
+    padding: 12px 14px;
+  }
+
+  /* Shopping Cart Drawer */
+  .cart-drawer {
+    width: 100vw;
+    right: -100vw;
+  }
+
+  /* Chatbox trên mobile */
+  .chat-widget {
+    width: calc(100vw - 30px);
+    right: 15px;
+    bottom: 85px;
+    height: 430px;
+  }
+
+  .chat-toggle-btn {
+    bottom: 20px;
+    right: 20px;
+    width: 52px;
+    height: 52px;
+    font-size: 1.4rem;
+  }
+
+  .back-to-top {
+    left: 20px;
+    bottom: 20px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .table-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-box {
+    min-width: 100%;
+  }
+}
+
+/* Mobile nhỏ (Dưới 480px) */
+@media screen and (max-width: 480px) {
+  .hero-title {
+    font-size: 2rem;
+    letter-spacing: 1px;
+  }
+
+  .hero-subtitle {
+    font-size: 1.7rem;
+  }
+
+  .hero-btns .btn {
+    width: 100%;
+  }
+
+  .section-padding {
+    padding: 4rem 0;
+  }
+
+  .tea-table th, 
+  .tea-table td {
+    padding: 12px 14px;
+    font-size: 0.85rem;
+  }
+
+  .toast-notice {
+    left: 15px;
+    right: 15px;
+    top: 15px;
+    font-size: 0.88rem;
+  }
+}

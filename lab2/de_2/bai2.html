@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Bài 2 - Tạo CSS cho nội dung</title>
+  <style>
+    body {
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      background-color: antiquewhite;
+      margin: 0;
+      padding: 40px;
+    }
+
+    .about__content {
+      max-width: 850px;
+    }
+
+    /* Tiêu đề phụ (màu xanh rêu ô-liu) */
+    .heading_first {
+      color: #6b8e23;
+      font-size: 48px;
+      font-weight: normal;
+      margin: 0 0 10px 0;
+    }
+
+    /* Tiêu đề chính (in hoa, màu xám đen, nét đậm) */
+    .heading_second {
+      color: #333333;
+      font-size: 64px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin: 0 0 25px 0;
+    }
+
+    /* Đoạn văn mô tả */
+    .about__text {
+      color: #111111;
+      font-size: 18px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    /* Nút liên kết Learn more */
+    .btn {
+      color: blue;
+      font-size: 18px;
+      text-decoration: underline;
+      display: inline-block;
+    }
+
+    .margin-top--medium {
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="about__content">
+    <h3 class="heading_first">About Our</h3>
+    <h2 class="heading_second">Tea station</h2>
+    <p class="about__text">
+      Once upon a time we only had a couple of teapots and enjoyed tea only with our family. Over time, we were able to afford to buy a small tea plantation
+    </p>
+    <p class="about__text">
+      Now we have a whole teahouse and we delight many people with delicious and hot tea. We serve black long tea, relaxing green and jasmine tea, tea with spices and many others.
+    </p>
+    <a href="#features" class="btn margin-top--medium">Learn more</a>
+  </div>
+
+</body>
+</html>

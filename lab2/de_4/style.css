@@ -1,0 +1,211 @@
+@import url("https://fonts.googleapis.com/css?family=Catamaran:400,700|Grand+Hotel");
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Catamaran", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* =========================================
+   MÀN HÌNH 1: MENU & BANNER
+   ========================================= */
+
+/* Menu */
+.nav__list {
+  list-style: none;
+}
+
+.nav__link {
+  font-family: "Catamaran", sans-serif;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size: 2.4rem;
+  font-weight: 700;
+  letter-spacing: calc(00.7rem - 0.4rem);
+  color: #3a3e3b;
+}
+
+/* Banner / Header */
+.header {
+  min-height: 100vh;
+  background-color: #e5e5e5;
+}
+
+.header h2 {
+  font-family: "Grand Hotel", cursive;
+  font-size: 3rem;
+  color: #698f3f;
+  letter-spacing: calc(00.7rem * 1.2);
+}
+
+.header h1 {
+  font-family: "Catamaran", sans-serif;
+  text-transform: uppercase;
+  color: #fff;
+  font-size: 6rem;
+  letter-spacing: 0.7rem;
+}
+
+/* =========================================
+   MÀN HÌNH 2: FEATURES
+   ========================================= */
+
+#features {
+  /*background-color:aquamarine;*/
+}
+
+.feature_item {
+  width: 25%;
+  text-align: center;
+  /*background-color:aquamarine;*/
+}
+
+.feature__title {
+  text-transform: uppercase;
+  font-size: 1.6rem;
+  letter-spacing: calc(0.7rem - 0.2rem);
+  color: #698f3f;
+}
+
+.feature__text {
+  font-size: 1.6rem;
+  color: #3a3e3b;
+}
+
+/* =========================================
+   MÀN HÌNH 3: ABOUT
+   ========================================= */
+
+.about_left,
+.about_right {
+  width: 50%;
+  /*background-color:antiquewhite;*/
+}
+
+/*.about__content {
+
+}*/
+
+.heading_first {
+  font-family: "Grand Hotel", cursive;
+  font-size: 3rem;
+  color: #698f3f;
+  letter-spacing: calc(00.7rem * 1.2);
+}
+
+.heading_second {
+  font-size: 3.4rem;
+  text-transform: uppercase;
+  color: #3a3e3b;
+}
+
+.heading_second--white {
+  color: #fff;
+}
+
+.about__text {
+  font-size: 1.8rem;
+}
+
+/* Button */
+.btn,
+.btn:link,
+.btn:visited {
+  color: #3a3e3b;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: calc(00.7rem - 0.5rem);
+}
+
+.btn:hover {
+  color: #e5e5e5;
+}
+
+/* =========================================
+   MÀN HÌNH 4: PRODUCTS
+   ========================================= */
+
+#product {
+  background-color: #3a3e3b;
+}
+
+.product_item {
+  width: 30%;
+}
+
+.products__text {
+  color: #fff;
+  font-size: 1.8rem;
+}
+
+.product-item__title {
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 2rem;
+  letter-spacing: calc(00.7rem - 0.3rem);
+}
+
+.product-item__price {
+  font-family: "Grand Hotel", cursive;
+  font-size: 2.6rem;
+  color: #698f3f;
+  font-weight: 700;
+}
+
+.product-item__price span {
+  margin-right: 1rem;
+  font-size: 3rem;
+  font-weight: 400;
+}
+
+/* =========================================
+   MÀN HÌNH 5: CONTACT
+   ========================================= */
+
+/*----- contact -----*/
+.contact {
+  background: #f1f5f8;
+}
+
+.contact-info,
+.contact-form {
+  width: 50%;
+}
+
+.contact-info {
+  text-transform: uppercase;
+  font-size: 1.8rem;
+}
+
+.contact-form {
+  background: #fff;
+  text-align: center;
+}
+
+.contact-form h3 {
+  color: #617d98;
+}
+
+.form-control {
+  width: 100%;
+  background: #f1f5f8;
+  text-transform: uppercase;
+  letter-spacing: 0.7rem;
+}
+
+.form-control::placeholder {
+  font-family: "Catamaran", sans-serif;
+  color: #102a42;
+  text-transform: uppercase;
+  letter-spacing: 0.7rem;
+}
+
+.submit-btn {
+  width: 100%;
+}

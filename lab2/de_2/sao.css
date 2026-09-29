@@ -1,0 +1,18 @@
+strong {
+    color: brown;
+}
+.doan1 {
+    color: red;
+    display: block;
+    margin-bottom: 1em;
+}
+.doan2 {
+    color: green;
+    display: block;
+    margin-bottom: 1em;
+}
+.doan3 {
+    color: blue;
+    display: block;
+    margin-bottom: 1em;
+}

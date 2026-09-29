@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Lab 2.1 - Bài 4: Ứng dụng Table tạo layout Tea Station</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      color: #333333;
+      background-color: #fdfdfd;
+    }
+    .main-table {
+      width: 900px;
+      margin: 0 auto;
+      border-collapse: collapse;
+      border: 1px solid #e0e0e0;
+      background: #ffffff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .top-features-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .feature-col {
+      padding: 15px;
+      vertical-align: top;
+      width: 25%;
+    }
+    .feature-col h4 {
+      margin-top: 0;
+      margin-bottom: 8px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    .feature-col p {
+      font-size: 12px;
+      line-height: 1.4;
+      color: #555555;
+      margin: 0;
+    }
+    .about-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    .about-img-td {
+      width: 50%;
+      padding: 15px;
+      vertical-align: middle;
+    }
+    .about-img-td img {
+      width: 100%;
+      display: block;
+      border-radius: 4px;
+    }
+    .about-text-td {
+      width: 50%;
+      padding: 20px 25px;
+      vertical-align: middle;
+    }
+    .about-sub {
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #698f3f;
+      margin: 0 0 5px 0;
+    }
+    .about-title {
+      font-size: 26px;
+      font-weight: bold;
+      margin: 0 0 15px 0;
+      color: #222;
+      text-transform: uppercase;
+    }
+    .about-text-td p {
+      font-size: 13px;
+      line-height: 1.5;
+      color: #444444;
+      margin-bottom: 12px;
+    }
+    .link-btn {
+      color: #333333;
+      font-size: 12px;
+      text-decoration: underline;
+      font-weight: bold;
+    }
+    .products-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 25px;
+      padding-bottom: 25px;
+    }
+    .product-info-td {
+      width: 34%;
+      padding: 15px 20px;
+      vertical-align: top;
+    }
+    .product-info-td h3 {
+      font-size: 18px;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+    .product-info-td p {
+      font-size: 12px;
+      line-height: 1.5;
+      color: #555555;
+      margin-bottom: 15px;
+    }
+    .product-card-td {
+      width: 33%;
+      padding: 15px;
+      vertical-align: top;
+      text-align: left;
+    }
+    .product-card-td img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      display: block;
+      margin-bottom: 10px;
+      border-radius: 4px;
+    }
+    .product-card-td h4 {
+      font-size: 13px;
+      text-transform: uppercase;
+      margin: 5px 0;
+      color: #222;
+    }
+    .product-card-td .price {
+      font-size: 13px;
+      color: #698f3f;
+      font-weight: bold;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Bố cục ứng dụng Table và các thuộc tính của Table theo đề bài Bài 4 -->
+  <table class="main-table" border="0" cellpadding="0" cellspacing="0">
+    
+    <!-- PHẦN 1: 4 CỘT TÍNH NĂNG (FEATURES) -->
+    <tr>
+      <td colspan="3">
+        <table class="top-features-table" border="0" cellpadding="10" cellspacing="0">
+          <tr>
+            <td class="feature-col">
+              <h4>Made with love</h4>
+              <p>Our tea is made with love, from the collection of the leaves to the brewing.</p>
+            </td>
+            <td class="feature-col">
+              <h4>Relaxation</h4>
+              <p>Set aside anxiety and relax after a hard day with a cup of hot tea in your hands.</p>
+            </td>
+            <td class="feature-col">
+              <h4>Energy</h4>
+              <p>Our tea will energize you with vitamins and invigorate the rest of the day.</p>
+            </td>
+            <td class="feature-col">
+              <h4>Family recipe</h4>
+              <p>All our recipes are passed down from generation to generation for a long time.</p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- DÒNG PHÂN CÁCH NHẸ -->
+    <tr>
+      <td colspan="3"><hr style="border: 0; border-top: 1px solid #f0f0f0; margin: 0 15px;"></td>
+    </tr>
+
+    <!-- PHẦN 2: KHỐI ABOUT (ẢNH ẤM TRÀ & NỘI DUNG GIỚI THIỆU) -->
+    <tr>
+      <td colspan="3">
+        <table class="about-table" border="0" cellpadding="10" cellspacing="0">
+          <tr>
+            <td class="about-img-td">
+              <img src="./images/about-bcg.jpeg" alt="About Tea Station">
+            </td>
+            <td class="about-text-td">
+              <p class="about-sub">About Our</p>
+              <h2 class="about-title">Tea station</h2>
+              <p>Once upon a time we only had a couple of teapots and enjoyed tea only with our family. Over time, we were able to afford to buy a small tea plantation</p>
+              <p>Now we have a whole teahouse and we delight many people with delicious and hot tea. We serve black long tea, relaxing green and jasmine tea, tea with spices and many others.</p>
+              <a href="#" class="link-btn">Learn more</a>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- DÒNG PHÂN CÁCH NHẸ -->
+    <tr>
+      <td colspan="3"><hr style="border: 0; border-top: 1px solid #f0f0f0; margin: 0 15px;"></td>
+    </tr>
+
+    <!-- PHẦN 3: KHỐI OUR PRODUCTS (GIỚI THIỆU VÀ 2 SẢN PHẨM TRÀ) -->
+    <tr>
+      <td colspan="3">
+        <table class="products-table" border="0" cellpadding="10" cellspacing="0">
+          <tr>
+            <td class="product-info-td">
+              <h3>OUR PRODUCTS</h3>
+              <p>Our assortment includes long tea, relaxing and invigorating green tea with spices, lemon juice, jasmine, cinnamon and anise, milk tea and many others.</p>
+              <a href="#" class="link-btn">Inventory</a>
+            </td>
+            <td class="product-card-td">
+              <img src="./images/product-1.jpeg" alt="Black Long Tea">
+              <h4>BLACK LONG TEA</h4>
+              <p class="price">$ 3.99</p>
+            </td>
+            <td class="product-card-td">
+              <img src="./images/product-2.jpeg" alt="Green Tea With Jasmine">
+              <h4>GREEN TEA WITH JASMINE</h4>
+              <p class="price">$ 4.99</p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+  </table>
+
+</body>
+</html>
