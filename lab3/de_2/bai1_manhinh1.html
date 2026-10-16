@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 6.2 - Bài 1 (Màn hình 1): Features Grid</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Montserrat', Arial, sans-serif;
+      background-color: #f7f7f7;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: #ffffff;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    /* ĐOẠN CSS GRID THEO ĐÚNG HƯỚNG DẪN CỦA ĐỀ TRANG 1 */
+    #features {
+      display: grid;
+      grid-template-columns: 25% 25% 25% 25%;
+    }
+
+    .feature-item {
+      padding: 60px 30px;
+      text-align: center;
+      background-color: #ffffff;
+      border-right: 1px solid #eee;
+      transition: transform 0.3s ease;
+    }
+
+    .feature-item:last-child {
+      border-right: none;
+    }
+
+    .feature-icon {
+      font-size: 36px;
+      color: #6b8e23;
+      margin-bottom: 25px;
+    }
+
+    .feature-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #333333;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .feature-text {
+      font-size: 14px;
+      line-height: 1.7;
+      color: #666666;
+    }
+
+    /* Cột ENERGY có màu nền xanh ô-liu nổi bật như trong hình mẫu */
+    .feature-item.energy {
+      background-color: #6b8e23;
+      color: #ffffff;
+    }
+
+    .feature-item.energy .feature-icon {
+      color: #ffffff;
+    }
+
+    .feature-item.energy .feature-title {
+      color: #ffffff;
+    }
+
+    .feature-item.energy .feature-text {
+      color: #f1f8e9;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Section #features sử dụng CSS Grid -->
+    <section id="features">
+      <!-- Cột 1: MADE WITH LOVE -->
+      <article class="feature-item">
+        <i class="fas fa-mug-hot feature-icon"></i>
+        <h4 class="feature-title">MADE WITH LOVE</h4>
+        <p class="feature-text">
+          Our tea is made with love, from the collection of the leaves to the brewing.
+        </p>
+      </article>
+
+      <!-- Cột 2: RELAXATION -->
+      <article class="feature-item">
+        <i class="fas fa-spa feature-icon"></i>
+        <h4 class="feature-title">RELAXATION</h4>
+        <p class="feature-text">
+          Set aside anxiety and relax after a hard day with a cup of hot tea in your hands.
+        </p>
+      </article>
+
+      <!-- Cột 3: ENERGY (Nền xanh rêu) -->
+      <article class="feature-item energy">
+        <i class="fas fa-bolt feature-icon"></i>
+        <h4 class="feature-title">ENERGY</h4>
+        <p class="feature-text">
+          Our tea will energize you with vitamins and invigorate the rest of the day.
+        </p>
+      </article>
+
+      <!-- Cột 4: FAMILY RECIPE -->
+      <article class="feature-item">
+        <i class="fas fa-book-open feature-icon"></i>
+        <h4 class="feature-title">FAMILY RECIPE</h4>
+        <p class="feature-text">
+          All our recipes are passed down from generation to generation for a long time.
+        </p>
+      </article>
+    </section>
+  </div>
+
+</body>
+</html>

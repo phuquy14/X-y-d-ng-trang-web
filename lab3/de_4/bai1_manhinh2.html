@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 6.1 - Bài 1: Màn hình 2 (Feature Items Flexbox)</title>
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts: Montserrat -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --mainTransition: all 0.3s linear;
+      --primaryColor: #6b8e23;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Montserrat', Arial, sans-serif;
+      background-color: #f0f2f5;
+      padding: 30px 20px;
+    }
+
+    /* Khung card mô phỏng giao diện mẫu trang 2 */
+    .features-card-wrapper {
+      max-width: 650px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      border: 1px solid #e1e4e8;
+    }
+
+    .card-topbar {
+      padding: 20px 25px 10px;
+      display: flex;
+      align-items: center;
+    }
+
+    .btn-menu {
+      background: transparent;
+      border: none;
+      font-size: 22px;
+      color: #333;
+      cursor: pointer;
+    }
+
+    /* ĐOẠN CSS FLEXBOX THEO ĐÚNG HƯỚNG DẪN CỦA ĐỀ TRANG 2 */
+    .feature_item {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      gap: 2rem;
+      transition: var(--mainTransition);
+      padding: 40px 35px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .feature_item:last-child {
+      border-bottom: none;
+    }
+
+    .feature_item:hover {
+      background-color: #fafafa;
+    }
+
+    .feature-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #6b8e23;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .feature-text {
+      font-size: 14px;
+      line-height: 1.8;
+      color: #555555;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    /* Khối RELAXATION có nền màu xanh ô-liu như hình mẫu trang 2 */
+    .feature_item.relaxation-highlight {
+      background-color: #6b8e23;
+      color: #ffffff;
+    }
+
+    .feature_item.relaxation-highlight .feature-title {
+      color: #ffffff;
+    }
+
+    .feature_item.relaxation-highlight .feature-text {
+      color: #f1f8e9;
+    }
+
+    .feature_item.relaxation-highlight:hover {
+      background-color: #55721c;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="features-card-wrapper">
+    <div class="card-topbar">
+      <button class="btn-menu" title="Menu"><i class="fas fa-bars"></i></button>
+    </div>
+
+    <!-- Khối 1: MADE WITH LOVE -->
+    <article class="feature_item">
+      <h4 class="feature-title">MADE WITH LOVE</h4>
+      <p class="feature-text">
+        Our tea is made with love, from the collection of the leaves to the brewing.
+      </p>
+    </article>
+
+    <!-- Khối 2: RELAXATION (Nền xanh rêu như ảnh mẫu) -->
+    <article class="feature_item relaxation-highlight">
+      <h4 class="feature-title">RELAXATION</h4>
+      <p class="feature-text">
+        Set aside anxiety and relax after a hard day with a cup of hot tea in your hands.
+      </p>
+    </article>
+
+    <!-- Khối 3: ENERGY -->
+    <article class="feature_item">
+      <h4 class="feature-title">ENERGY</h4>
+      <p class="feature-text">
+        Our tea will energize you with vitamins and invigorate the rest of the day.
+      </p>
+    </article>
+
+    <!-- Khối 4: FAMILY RECIPE -->
+    <article class="feature_item">
+      <h4 class="feature-title">FAMILY RECIPE</h4>
+      <p class="feature-text">
+        All our recipes are passed down from generation to generation for a long time.
+      </p>
+    </article>
+  </div>
+
+</body>
+</html>

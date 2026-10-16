@@ -1,0 +1,161 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bài 2: Ứng dụng Position</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #f5f5f5;
+      min-height: 100vh;
+    }
+
+    /* Khung chính bao phủ toàn bộ trang */
+    .mockup-wrapper {
+      width: 100%;
+      min-height: 100vh;
+      background: #111;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header màu đen */
+    .header-bar {
+      background-color: #1a1a1a;
+      padding: 18px 24px;
+      position: relative;
+      z-index: 10;
+      flex-shrink: 0;
+    }
+
+    .brand-logo {
+      color: #ffffff;
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      display: inline-block;
+    }
+
+    /* Hero chiếm toàn bộ không gian còn lại */
+    .hero-container {
+      position: relative;
+      flex: 1;
+      min-height: 480px;
+      background-image: url('images/coffee-bg.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    /* Lớp phủ tối */
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(35, 20, 15, 0.75);
+    }
+
+    /* Nội dung căn giữa bằng position absolute */
+    .hero-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      width: 85%;
+      max-width: 800px;
+      color: #ffffff;
+      z-index: 2;
+    }
+
+    .hero-title {
+      font-size: 34px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      letter-spacing: 1px;
+    }
+
+    .hero-desc {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #e0e0e0;
+      margin-bottom: 25px;
+    }
+
+    .btn-explore {
+      display: inline-block;
+      padding: 10px 28px;
+      border: 1px solid #ffffff;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-explore:hover {
+      background-color: #ffffff;
+      color: #111111;
+    }
+
+    /* Thanh đỏ dưới đáy */
+    .footer-bar {
+      height: 70px;
+      background-color: #e52b2b;
+      position: relative;
+      z-index: 5;
+      flex-shrink: 0;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="mockup-wrapper">
+
+    <!-- Header -->
+    <header class="header-bar">
+      <div class="brand-logo">KOFI</div>
+    </header>
+
+    <!-- Hero -->
+    <main class="hero-container">
+      <div class="hero-overlay"></div>
+
+      <div class="hero-content">
+        <h1 class="hero-title">Coffee Market</h1>
+
+        <p class="hero-desc">
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+          Rerum quidem possimus magni labore accusamus hic inventore
+          provident, beatae iure ducimus?
+        </p>
+
+        <a href="#explore" class="btn-explore">EXPLORE MORE</a>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-bar"></footer>
+
+  </div>
+</body>
+</html>

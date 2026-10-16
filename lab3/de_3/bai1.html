@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 5.2 - Bài 1: Transform, Transition & Animation</title>
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts: Courgette, Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Courgette&family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Montserrat', Arial, sans-serif;
+      background-color: #121212;
+      color: #ffffff;
+      overflow-x: hidden;
+    }
+
+    /* ========================================================
+       MÀN HÌNH 1: NAV LINK TRANSITION & TRANSFORM (THEO ĐỀ TRANG 1)
+       ======================================================== */
+    .menu-toggle-btn {
+      position: fixed;
+      top: 25px;
+      left: 25px;
+      z-index: 1500;
+      background: #eee;
+      color: #333;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 24px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      user-select: none;
+    }
+
+    #sidebar-check {
+      display: none;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -280px;
+      width: 280px;
+      height: 100vh;
+      background-color: #f5f5f5;
+      padding: 80px 25px 25px;
+      z-index: 1400;
+      box-shadow: 4px 0 15px rgba(0,0,0,0.3);
+      transition: left 0.4s ease;
+    }
+
+    #sidebar-check:checked ~ .sidebar {
+      left: 0;
+    }
+
+    .nav__list {
+      list-style: none;
+    }
+
+    .nav__item {
+      margin-bottom: 20px;
+    }
+
+    /* CSS ĐÚNG THEO HƯỚNG DẪN MÀN HÌNH 1 */
+    .nav__link:link, .nav__link:visited {
+      display: block;
+      color: #333333;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 10px;
+      border-radius: 4px;
+      transition: all 0.3s linear;
+    }
+
+    .nav__link:hover {
+      background-color: #d1b46a;
+      color: #000;
+      transform: translateX(10%);
+    }
+
+    .nav__link:active {
+      transform: translateX(10%) scale(0.95);
+    }
+
+    /* ========================================================
+       MÀN HÌNH 2: HEADER ANIMATION & KEYFRAMES (THEO ĐỀ TRANG 2, 3, 4)
+       ======================================================== */
+    .hero-header {
+      position: relative;
+      min-height: 85vh;
+      background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('images/hero-bg.jpg') center/cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    /* Animation cho tiêu đề phụ */
+    .heading_first {
+      font-family: 'Courgette', cursive;
+      color: #d1b46a;
+      font-size: 32px;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    }
+
+    .heading_first--animation {
+      animation: slideInRight 5s ease-in-out;
+    }
+
+    /* Animation cho tiêu đề chính */
+    .heading_primary {
+      font-size: 50px;
+      font-weight: 800;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      margin-bottom: 35px;
+      text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.8);
+      max-width: 800px;
+      line-height: 1.2;
+      animation: slideInLeft 5s ease-in-out;
+    }
+
+    /* Animation cho nút Explore */
+    .header__btn:link, .header__btn:visited {
+      display: inline-block;
+      background-color: #6b8e23;
+      color: #ffffff;
+      padding: 12px 36px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      border: 1px solid #55721c;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+      animation: show 2s 1s linear;
+      animation-fill-mode: backwards;
+      letter-spacing: 0.7rem;
+      transition: background-color 0.3s;
+    }
+
+    .header__btn:hover {
+      background-color: #55721c;
+    }
+
+    /* CÁC KEYFRAMES THEO ĐÚNG HƯỚNG DẪN TRANG 3 VÀ 4 CỦA ĐỀ */
+    @keyframes slideInLeft {
+      0% {
+        opacity: 0.1;
+        transform: translateX(-100%);
+      }
+      50% {
+        opacity: 0.7;
+        transform: translateX(25%);
+      }
+      75% {
+        opacity: 0.9;
+        transform: translateX(-10%);
+      }
+      100% {
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes slideInRight {
+      0% {
+        opacity: 0.1;
+        transform: translateX(100%);
+      }
+      50% {
+        opacity: 0.7;
+        transform: translateX(-25%);
+      }
+      75% {
+        opacity: 0.9;
+        transform: translateX(10%);
+      }
+      100% {
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes show {
+      0% {
+        opacity: 0;
+        transform: scale(2);
+      }
+      25% {
+        transform: scale(1.5);
+      }
+      50% {
+        transform: scale(0.9);
+      }
+      75% {
+        transform: scale(1.2);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    /* ========================================================
+       MÀN HÌNH 3: ABOUT IMAGE HOVER EFFECT (THEO ĐỀ TRANG 4, 5)
+       ======================================================== */
+    .about-demo-section {
+      background-color: #ffffff;
+      color: #333;
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    .about-demo-section h2 {
+      font-size: 26px;
+      margin-bottom: 30px;
+      color: #222;
+    }
+
+    .about_left {
+      overflow: hidden;
+      width: 90%;
+      max-width: 550px;
+      margin: 0 auto;
+      border-radius: 8px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      border: 4px solid #6b8e23;
+    }
+
+    .about__img {
+      transition: all 0.3s linear;
+      display: block;
+    }
+
+    .about_left:hover .about__img {
+      opacity: 0.5;
+      transform: scale(1.2);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Checkbox điều khiển Sidebar (Màn hình 1) -->
+  <input type="checkbox" id="sidebar-check">
+  <label for="sidebar-check" class="menu-toggle-btn" title="Click để mở/đóng menu">
+    <i class="fas fa-bars"></i>
+  </label>
+
+  <!-- Sidebar với .nav__link (Màn hình 1) -->
+  <aside class="sidebar">
+    <h3 style="color:#222; margin-bottom: 25px; font-size: 20px;">MENU DEMO</h3>
+    <ul class="nav__list">
+      <li class="nav__item"><a href="#features" class="nav__link">Features</a></li>
+      <li class="nav__item"><a href="#about" class="nav__link">About Us</a></li>
+      <li class="nav__item"><a href="#products" class="nav__link">Products</a></li>
+      <li class="nav__item"><a href="#services" class="nav__link">Services</a></li>
+      <li class="nav__item"><a href="#contacts" class="nav__link">Contacts</a></li>
+    </ul>
+    <p style="font-size: 12px; color: #777; margin-top: 30px;">
+      Hover vào link để thấy <code>translateX(10%)</code>. Nhấp chuột (active) để thấy <code>scale(0.95)</code>.
+    </p>
+  </aside>
+
+  <!-- Hero Header với Animations (Màn hình 2) -->
+  <header class="hero-header">
+    <h3 class="heading_first heading_first--animation">Over one hundred flavors of tea</h3>
+    <h1 class="heading_primary">SPECIALLY CRAFTED TEA</h1>
+    <a href="#about-demo" class="header__btn">EXPLORE</a>
+  </header>
+
+  <!-- About Image Hover (Màn hình 3) -->
+  <section class="about-demo-section" id="about-demo">
+    <h2>MÀN HÌNH 3: HIỆU ỨNG RÊ CHUỘT ẢNH (HOVER)</h2>
+    <p style="margin-bottom: 25px; color: #666;">Rê chuột vào hình ảnh bên dưới để kiểm tra hiệu ứng phóng to <code>scale(1.2)</code> và giảm độ mờ <code>opacity: 0.5</code> trong khung <code>overflow: hidden</code>:</p>
+    
+    <div class="about_left">
+      <img src="./images/about-bcg.jpeg" width="100%" alt="About Us" class="about__img">
+    </div>
+  </section>
+
+</body>
+</html>

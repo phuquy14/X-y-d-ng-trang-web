@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bài 3: Menu Display / Position</title>
+  <!-- Google Fonts: Courgette / Dancing Script for cursive subtitle -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Courgette&family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Montserrat', Arial, sans-serif;
+      background-color: #2f3542;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .browser-frame {
+      width: 100%;
+      max-width: 900px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      background-color: #000;
+      position: relative;
+    }
+
+    /* Thanh Menu sử dụng Display Flex / Position */
+    .nav-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(220, 226, 230, 0.9);
+      padding: 12px 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .nav-list {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: #4a4a4a;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: color 0.3s ease;
+      display: inline-block;
+    }
+
+    .nav-link:hover {
+      color: #6b8e23;
+    }
+
+    /* Hero Banner */
+    .hero {
+      position: relative;
+      height: 520px;
+      background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.5)), url('images/hero-bg.jpg') center/cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 80px 20px 40px;
+    }
+
+    .hero-subtitle {
+      font-family: 'Courgette', cursive;
+      color: #d1b46a;
+      font-size: 26px;
+      margin-bottom: 15px;
+      letter-spacing: 1px;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+    }
+
+    .hero-title {
+      font-size: 44px;
+      font-weight: 800;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      margin-bottom: 30px;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+    }
+
+    .btn-explore {
+      display: inline-block;
+      background-color: #6b8e23;
+      color: #ffffff;
+      padding: 10px 28px;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border: 1px solid #55721c;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .btn-explore:hover {
+      background-color: #55721c;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="browser-frame">
+    <!-- Navigation Menu (Display / Position) -->
+    <nav class="nav-bar">
+      <ul class="nav-list">
+        <li><a href="#features" class="nav-link">FEATURES</a></li>
+        <li><a href="#about" class="nav-link">ABOUT</a></li>
+        <li><a href="#products" class="nav-link">PRODUCTS</a></li>
+        <li><a href="#services" class="nav-link">SERVICES</a></li>
+        <li><a href="#contacts" class="nav-link">CONTACTS</a></li>
+      </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+      <h3 class="hero-subtitle">Over one hundred flavors of tea</h3>
+      <h1 class="hero-title">SPECIALLY CRAFTED TEA</h1>
+      <a href="#explore" class="btn-explore">EXPLORE</a>
+    </header>
+  </div>
+
+</body>
+</html>

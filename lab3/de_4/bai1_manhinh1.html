@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 6.1 - Bài 1: Màn hình 1 (Header Flexbox)</title>
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts: Courgette, Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Courgette&family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Montserrat', Arial, sans-serif;
+      background-color: #222;
+      color: #fff;
+    }
+
+    /* Nút hamburger mở menu góc trái theo ảnh mẫu */
+    .btn-nav-menu {
+      position: absolute;
+      top: 25px;
+      left: 25px;
+      z-index: 100;
+      background: #eee;
+      color: #333;
+      padding: 8px 14px;
+      border-radius: 4px;
+      font-size: 22px;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    /* ĐOẠN CSS FLEXBOX CHO .header THEO ĐÚNG HƯỚNG DẪN CỦA ĐỀ TRANG 1 */
+    .header {
+      min-height: 85vh;
+      background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('images/hero-bg.jpg') center/cover no-repeat;
+      position: relative;
+
+      /* CSS Flexbox theo hướng dẫn */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .header-subtitle {
+      font-family: 'Courgette', cursive;
+      color: #d1b46a;
+      font-size: 32px;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    }
+
+    .header-title {
+      font-size: 52px;
+      font-weight: 800;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: #ffffff;
+      margin-bottom: 35px;
+      text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.8);
+      max-width: 800px;
+      line-height: 1.2;
+    }
+
+    .btn-explore {
+      display: inline-block;
+      background-color: #6b8e23;
+      color: #ffffff;
+      padding: 12px 36px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border: 1px solid #55721c;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .btn-explore:hover {
+      background-color: #55721c;
+      transform: translateY(-3px);
+    }
+  </style>
+</head>
+<body>
+
+  <button class="btn-nav-menu" title="Menu"><i class="fas fa-bars"></i></button>
+
+  <!-- Phần tử .header sử dụng CSS Flexbox theo đề bài -->
+  <header class="header">
+    <h3 class="header-subtitle">Over one hundred flavors of tea</h3>
+    <h1 class="header-title">SPECIALLY CRAFTED TEA</h1>
+    <a href="#explore" class="btn-explore">EXPLORE</a>
+  </header>
+
+</body>
+</html>

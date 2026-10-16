@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 6.2 - Bài 1 (Màn hình 2): About Section Grid</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Courgette&family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Montserrat', Arial, sans-serif;
+      background-color: #f7f7f7;
+      color: #333;
+    }
+
+    /* ĐOẠN CSS GRID SECTION #about THEO ĐÚNG HƯỚNG DẪN CỦA ĐỀ TRANG 2 */
+    #about {
+      padding: 8rem 5%;
+      display: grid;
+      justify-items: center;
+      grid-template-columns: 50% 50%;
+      align-items: center;
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Cột bên trái: Hình ảnh */
+    .about-img-container {
+      position: relative;
+      width: 100%;
+      max-width: 480px;
+    }
+
+    .about-img-container::before {
+      content: '';
+      position: absolute;
+      top: -15px;
+      left: -15px;
+      width: 100%;
+      height: 100%;
+      border: 6px solid #6b8e23;
+      border-radius: 8px;
+      z-index: 1;
+    }
+
+    .about-img {
+      width: 100%;
+      display: block;
+      border-radius: 8px;
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Cột bên phải: Nội dung văn bản */
+    .about-info {
+      padding: 0 20px;
+    }
+
+    .heading-first {
+      font-family: 'Courgette', cursive;
+      color: #6b8e23;
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    .heading-second {
+      font-size: 36px;
+      font-weight: 800;
+      color: #222222;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .about-text {
+      font-size: 14px;
+      line-height: 1.8;
+      color: #555555;
+      margin-bottom: 20px;
+    }
+
+    .btn-learn {
+      display: inline-block;
+      background-color: #6b8e23;
+      color: #ffffff;
+      padding: 12px 32px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 4px 10px rgba(107, 142, 35, 0.3);
+    }
+
+    .btn-learn:hover {
+      background-color: #55721c;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Section #about sử dụng CSS Grid theo đề -->
+  <section id="about">
+    <!-- Cột 1: Hình ảnh ấm trà -->
+    <div class="about-img-container">
+      <img src="images/about-tea.jpg" alt="About Tea Station" class="about-img">
+    </div>
+
+    <!-- Cột 2: Nội dung mô tả -->
+    <div class="about-info">
+      <h3 class="heading-first">About Our</h3>
+      <h2 class="heading-second">TEA STATION</h2>
+      <p class="about-text">
+        Once upon a time we only had a couple of teapots and enjoyed tea only with our family. Over time, we were able to afford to buy a small tea plantation.
+      </p>
+      <p class="about-text">
+        Now we have a whole teahouse and we delight many people with delicious and hot tea. We serve black long tea, relaxing green and jasmine tea, tea with spices and many others.
+      </p>
+      <a href="#learn" class="btn-learn">LEARN MORE</a>
+    </div>
+  </section>
+
+</body>
+</html>

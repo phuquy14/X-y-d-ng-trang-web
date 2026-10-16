@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bài 3*: CSS :checked Pseudo Menu</title>
+  <!-- Google Fonts: Courgette, Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Courgette&family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Montserrat', Arial, sans-serif;
+      background-color: #1a1a1a;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* 1. Checkbox ẩn */
+    #menu-toggle {
+      display: none;
+    }
+
+    /* 2. Định dạng nút bấm mở/đóng menu (Theo đúng đề Lab 5 trang 4, 5) */
+    .menu-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+      font-size: 30px;
+      cursor: pointer;
+      background: #eee;
+      padding: 5px 12px;
+      border-radius: 5px;
+      line-height: 1;
+      user-select: none;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+      transition: background-color 0.2s ease;
+    }
+
+    .menu-button:hover {
+      background: #ddd;
+    }
+
+    /* Mặc định khi chưa check */
+    .close-icon {
+      display: none;
+    }
+
+    .open-icon {
+      display: inline-block;
+    }
+
+    /* 3. Định dạng thanh menu trượt (Theo đúng đề Lab 5 trang 5) */
+    .nav {
+      min-height: 8vh;
+      background-color: #e5e5e5;
+      margin: 0;
+      padding: 80px 20px 20px 20px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 250px;
+      height: 100%;
+      display: none;
+      z-index: 999;
+      box-shadow: 4px 0 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .nav ul {
+      list-style: none;
+    }
+
+    .nav li {
+      margin-bottom: 20px;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: #333333;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      display: block;
+      padding: 8px 12px;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+    }
+
+    .nav a:hover {
+      background-color: #d1b46a;
+      color: #111;
+      padding-left: 18px;
+    }
+
+    /* 4. Bước 2: Hiệu ứng khi #menu-toggle:checked (Theo đúng hướng dẫn trang 5) */
+    #menu-toggle:checked ~ .nav {
+      display: block;
+    }
+
+    #menu-toggle:checked ~ .menu-button .open-icon {
+      display: none;
+    }
+
+    #menu-toggle:checked ~ .menu-button .close-icon {
+      display: inline-block;
+    }
+
+    /* Hero Banner phía sau */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('images/hero-bg.jpg') center/cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .hero-subtitle {
+      font-family: 'Courgette', cursive;
+      color: #d1b46a;
+      font-size: 32px;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    }
+
+    .hero-title {
+      font-size: 52px;
+      font-weight: 800;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      margin-bottom: 35px;
+      text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.8);
+      max-width: 800px;
+      line-height: 1.2;
+    }
+
+    .btn-explore {
+      display: inline-block;
+      background-color: #6b8e23;
+      color: #ffffff;
+      padding: 12px 36px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border: 1px solid #55721c;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .btn-explore:hover {
+      background-color: #55721c;
+      transform: translateY(-3px);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Input checkbox điều khiển ẩn/hiện -->
+  <input type="checkbox" id="menu-toggle">
+
+  <!-- Label đóng vai trò nút bấm -->
+  <label for="menu-toggle" class="menu-button">
+    <span class="open-icon">&#9776;</span>
+    <span class="close-icon">&times;</span>
+  </label>
+
+  <!-- Thanh menu sidebar trượt ra khi checkbox được checked -->
+  <nav class="nav">
+    <ul>
+      <li><a href="#features">FEATURES</a></li>
+      <li><a href="#about">ABOUT</a></li>
+      <li><a href="#products">PRODUCTS</a></li>
+      <li><a href="#services">SERVICES</a></li>
+      <li><a href="#contacts">CONTACTS</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section nền ấm trà -->
+  <header class="hero">
+    <h3 class="hero-subtitle">Over one hundred flavors of tea</h3>
+    <h1 class="hero-title">SPECIALLY CRAFTED TEA</h1>
+    <a href="#explore" class="btn-explore">EXPLORE</a>
+  </header>
+
+</body>
+</html>

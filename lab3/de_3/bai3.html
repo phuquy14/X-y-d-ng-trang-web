@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 5.2 - Bài 3: GV Cho Thêm (Page Title Beach Banner)</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Áp dụng CSS Flexbox căn giữa toàn bộ trang */
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #333;
+      padding: 20px;
+      font-family: 'Times New Roman', Times, serif;
+    }
+
+    /* Khung màn hình hiển thị bãi biển nhiệt đới */
+    .beach-banner {
+      width: 100%;
+      max-width: 900px;
+      height: 580px;
+      background-image: url('images/beach-bg.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      border-radius: 8px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+
+      /* Sử dụng CSS Flexbox để căn giữa hoàn hảo tiêu đề PAGE TITLE */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Hiệu ứng chữ PAGE TITLE theo đúng hình ảnh trong đề */
+    .page-title {
+      font-size: 80px;
+      font-weight: 900;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #e52b2b;
+      
+      /* Hiệu ứng bóng chữ và viền nghệ thuật 3D */
+      text-shadow: 
+        2px 2px 0px #8b0000,
+        4px 4px 10px rgba(0, 0, 0, 0.6),
+        0 0 20px rgba(255, 255, 255, 0.5);
+      
+      transform: scaleY(1.1);
+      user-select: none;
+      animation: pulseTitle 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes pulseTitle {
+      0% {
+        transform: scale(1);
+      }
+      100% {
+        transform: scale(1.05);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="beach-banner">
+    <h1 class="page-title">PAGE TITLE</h1>
+  </div>
+
+</body>
+</html>

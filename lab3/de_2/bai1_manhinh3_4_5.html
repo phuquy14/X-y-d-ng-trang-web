@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 6.2 - Bài 1: Màn hình 3, 4, 5 (CSS Grid)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Courgette&family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Montserrat', Arial, sans-serif;
+      background-color: #f0f2f5;
+      color: #333;
+    }
+
+    /* ========================================================
+       MÀN HÌNH 3: OUR PRODUCTS (CSS GRID)
+       ======================================================== */
+    .products-section {
+      background-color: #22252a;
+      padding: 70px 5%;
+      color: #fff;
+    }
+
+    .products-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 30px;
+      align-items: stretch;
+    }
+
+    .products-intro-card {
+      border: 1px solid rgba(209, 180, 106, 0.4);
+      padding: 35px 25px;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .products-intro-card .subtitle {
+      font-family: 'Courgette', cursive;
+      color: #d1b46a;
+      font-size: 24px;
+      margin-bottom: 5px;
+    }
+
+    .products-intro-card .title {
+      font-size: 24px;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: 2px;
+      margin-bottom: 15px;
+    }
+
+    .products-intro-card p {
+      font-size: 13px;
+      line-height: 1.6;
+      color: #cccccc;
+      margin-bottom: 25px;
+    }
+
+    .btn-inventory {
+      align-self: flex-start;
+      border: 1px solid #6b8e23;
+      color: #8dbb2d;
+      padding: 8px 22px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .btn-inventory:hover {
+      background-color: #6b8e23;
+      color: #fff;
+    }
+
+    .product-card {
+      border: 1px solid rgba(209, 180, 106, 0.3);
+      border-radius: 8px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-img-box {
+      width: 100%;
+      height: 220px;
+      overflow: hidden;
+      border-radius: 6px;
+      margin-bottom: 20px;
+    }
+
+    .product-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .product-name {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      color: #f1f1f1;
+    }
+
+    .product-price {
+      font-size: 18px;
+      font-weight: 700;
+      color: #d1b46a;
+    }
+
+    /* ========================================================
+       MÀN HÌNH 4: OUR SERVICES (CSS GRID)
+       ======================================================== */
+    .services-section {
+      background-color: #ffffff;
+      padding: 70px 5%;
+      text-align: center;
+    }
+
+    .services-header {
+      margin-bottom: 50px;
+    }
+
+    .services-header .subheading {
+      font-family: 'Courgette', cursive;
+      color: #6b8e23;
+      font-size: 26px;
+      margin-bottom: 5px;
+    }
+
+    .services-header .mainheading {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #222;
+    }
+
+    .services-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+
+    .service-card {
+      background-color: #6b8e23;
+      border-radius: 12px;
+      padding: 35px 25px;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 8px 20px rgba(107, 142, 35, 0.2);
+    }
+
+    .service-img-wrapper {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 4px solid #ffffff;
+      margin-bottom: 25px;
+    }
+
+    .service-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .service-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 25px;
+      letter-spacing: 1px;
+    }
+
+    .btn-readmore {
+      background-color: #ffffff;
+      color: #333333;
+      padding: 8px 24px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+
+    .btn-readmore:hover {
+      background-color: #f0f0f0;
+    }
+
+    /* ========================================================
+       MÀN HÌNH 5: CONTACT US (CSS GRID)
+       ======================================================== */
+    .contact-section {
+      background-color: #fafafa;
+      padding: 80px 5%;
+    }
+
+    .contact-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 45% 55%;
+      gap: 50px;
+      align-items: start;
+    }
+
+    .contact-info-col h3.label {
+      font-family: 'Courgette', cursive;
+      color: #6b8e23;
+      font-size: 24px;
+      font-weight: normal;
+      margin-bottom: 6px;
+    }
+
+    .contact-info-col p.val {
+      font-size: 13px;
+      font-weight: 700;
+      color: #222;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 30px;
+    }
+
+    .contact-form-box {
+      background: #ffffff;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.05);
+    }
+
+    .contact-form-box h3.form-title {
+      font-family: 'Courgette', cursive;
+      color: #6b8e23;
+      font-size: 28px;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px 16px;
+      background: #f5f5f5;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #333;
+      outline: none;
+    }
+
+    .form-control:focus {
+      border-color: #6b8e23;
+      background: #fff;
+    }
+
+    textarea.form-control {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .btn-submit {
+      width: 100%;
+      background-color: #6b8e23;
+      color: #ffffff;
+      border: none;
+      padding: 14px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+    }
+
+    .btn-submit:hover {
+      background-color: #55721c;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PHẦN 1: MÀN HÌNH 3 - OUR PRODUCTS -->
+  <section class="products-section">
+    <div class="products-grid">
+      <!-- Cột 1: Thông tin sản phẩm -->
+      <div class="products-intro-card">
+        <h4 class="subtitle">Check Out</h4>
+        <h2 class="title">OUR PRODUCTS</h2>
+        <p>
+          Our assortment includes long tea, relaxing and invigorating green tea with spices, lemon juice, jasmine, cinnamon and anise, milk tea and many others.
+        </p>
+        <a href="#inventory" class="btn-inventory">INVENTORY</a>
+      </div>
+
+      <!-- Cột 2: Sản phẩm 1 -->
+      <div class="product-card">
+        <div class="product-img-box">
+          <img src="images/product-1.jpg" alt="Black Long Tea">
+        </div>
+        <h4 class="product-name">BLACK LONG TEA</h4>
+        <span class="product-price">$ 9.99</span>
+      </div>
+
+      <!-- Cột 3: Sản phẩm 2 -->
+      <div class="product-card">
+        <div class="product-img-box">
+          <img src="images/product-2.jpg" alt="Green Tea with Jasmine">
+        </div>
+        <h4 class="product-name">GREEN TEA WITH JASMINE</h4>
+        <span class="product-price">$ 4.99</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHẦN 2: MÀN HÌNH 4 - OUR SERVICES -->
+  <section class="services-section">
+    <div class="services-header">
+      <h3 class="subheading">Explore</h3>
+      <h2 class="mainheading">OUR SERVICES</h2>
+    </div>
+
+    <div class="services-grid">
+      <!-- Dịch vụ 1 -->
+      <div class="service-card">
+        <div class="service-img-wrapper">
+          <img src="images/service-1.jpg" alt="Custom Recipe Service">
+        </div>
+        <h4 class="service-title">Custom Recipe Service</h4>
+        <a href="#read" class="btn-readmore">Read More</a>
+      </div>
+
+      <!-- Dịch vụ 2 -->
+      <div class="service-card">
+        <div class="service-img-wrapper">
+          <img src="images/service-2.jpg" alt="Home Delivery Service">
+        </div>
+        <h4 class="service-title">Home Delivery Service</h4>
+        <a href="#read" class="btn-readmore">Read More</a>
+      </div>
+
+      <!-- Dịch vụ 3 -->
+      <div class="service-card">
+        <div class="service-img-wrapper">
+          <img src="images/service-3.jpg" alt="Tea Aging Service">
+        </div>
+        <h4 class="service-title">Tea Aging Service</h4>
+        <a href="#read" class="btn-readmore">Read More</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHẦN 3: MÀN HÌNH 5 - CONTACT US -->
+  <section class="contact-section">
+    <div class="contact-grid">
+      <!-- Cột 1: Thông tin liên hệ -->
+      <div class="contact-info-col">
+        <h3 class="label">address</h3>
+        <p class="val">523 N FAIRFAX AVE<br>LOS ANGELES, CA 90048</p>
+
+        <h3 class="label">email</h3>
+        <p class="val">EMAIL@EMAIL.COM</p>
+
+        <h3 class="label">telephone</h3>
+        <p class="val">+ 123 456 789</p>
+      </div>
+
+      <!-- Cột 2: Biểu mẫu gửi liên hệ -->
+      <div class="contact-form-box">
+        <h3 class="form-title">contact us</h3>
+        <form onsubmit="event.preventDefault(); alert('Cảm ơn bạn đã gửi liên hệ!');">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="NAME" required>
+          </div>
+          <div class="form-group">
+            <input type="email" class="form-control" placeholder="EMAIL" required>
+          </div>
+          <div class="form-group">
+            <textarea class="form-control" placeholder="MESSAGE" rows="4" required></textarea>
+          </div>
+          <button type="submit" class="btn-submit">SUBMIT HERE</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

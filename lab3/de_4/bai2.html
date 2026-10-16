@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 6.1 - Bài 2: Website Tea Station Hoàn Chỉnh (CSS Flexbox)</title>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts: Courgette, Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Courgette&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primaryColor: #6b8e23;
+      --primaryDark: #55721c;
+      --secondaryColor: #d1b46a;
+      --mainWhite: #ffffff;
+      --mainBlack: #222222;
+      --mainGrey: #f7f7f7;
+      --darkGrey: #666666;
+      --mainTransition: all 0.3s ease-in-out;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Montserrat', Arial, sans-serif;
+      background-color: var(--mainWhite);
+      color: var(--mainBlack);
+      line-height: 1.6;
+    }
+
+    /* ========================================================
+       1. NAVIGATION - CSS FLEXBOX
+       ======================================================== */
+    .navbar {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(5px);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 5%;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--mainBlack);
+      font-weight: 800;
+      font-size: 20px;
+      letter-spacing: 2px;
+    }
+
+    .brand-logo img {
+      height: 35px;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 25px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--darkGrey);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      transition: var(--mainTransition);
+    }
+
+    .nav-links a:hover {
+      color: var(--primaryColor);
+    }
+
+    /* ========================================================
+       2. HERO HEADER - CSS FLEXBOX (THEO BÀI 1 MÀN HÌNH 1)
+       ======================================================== */
+    .header {
+      min-height: 80vh;
+      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('images/hero-bg.jpg') center/cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      text-align: center;
+      padding: 40px 20px;
+      color: #fff;
+    }
+
+    .header-subtitle {
+      font-family: 'Courgette', cursive;
+      color: var(--secondaryColor);
+      font-size: 32px;
+      margin-bottom: 15px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    }
+
+    .header-title {
+      font-size: 48px;
+      font-weight: 800;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 30px;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+    }
+
+    .btn-explore {
+      background-color: var(--primaryColor);
+      color: #fff;
+      padding: 12px 36px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 4px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      transition: var(--mainTransition);
+    }
+
+    .btn-explore:hover {
+      background-color: var(--primaryDark);
+      transform: translateY(-3px);
+    }
+
+    /* ========================================================
+       3. FEATURES SECTION - CSS FLEXBOX (THEO BÀI 1 MÀN HÌNH 2)
+       ======================================================== */
+    .features-container {
+      display: flex;
+      flex-wrap: wrap;
+      border-bottom: 1px solid #eee;
+    }
+
+    .feature_item {
+      flex: 1 1 250px;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      gap: 1.5rem;
+      padding: 60px 25px;
+      transition: var(--mainTransition);
+      border-right: 1px solid #eee;
+      background: var(--mainWhite);
+    }
+
+    .feature_item:last-child {
+      border-right: none;
+    }
+
+    .feature-icon {
+      font-size: 36px;
+      color: var(--primaryColor);
+    }
+
+    .feature-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--mainBlack);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .feature-text {
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--darkGrey);
+    }
+
+    .feature_item.highlight {
+      background-color: var(--primaryColor);
+      color: #fff;
+    }
+
+    .feature_item.highlight .feature-icon,
+    .feature_item.highlight .feature-title {
+      color: #fff;
+    }
+
+    .feature_item.highlight .feature-text {
+      color: #f1f8e9;
+    }
+
+    /* ========================================================
+       4. ABOUT SECTION - CSS FLEXBOX
+       ======================================================== */
+    .about-section {
+      padding: 80px 5%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 60px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .about-img-container {
+      flex: 1;
+      position: relative;
+      max-width: 480px;
+    }
+
+    .about-img-container::before {
+      content: '';
+      position: absolute;
+      top: -15px;
+      left: -15px;
+      width: 100%;
+      height: 100%;
+      border: 6px solid var(--primaryColor);
+      border-radius: 8px;
+      z-index: 1;
+    }
+
+    .about-img {
+      width: 100%;
+      display: block;
+      border-radius: 8px;
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .about-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+    }
+
+    .heading-first {
+      font-family: 'Courgette', cursive;
+      color: var(--primaryColor);
+      font-size: 32px;
+    }
+
+    .heading-second {
+      font-size: 34px;
+      font-weight: 800;
+      color: var(--mainBlack);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .about-text {
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--darkGrey);
+    }
+
+    .btn-learn {
+      margin-top: 10px;
+      background-color: var(--primaryColor);
+      color: #fff;
+      padding: 12px 32px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: var(--mainTransition);
+    }
+
+    .btn-learn:hover {
+      background-color: var(--primaryDark);
+    }
+
+    /* ========================================================
+       5. PRODUCTS SECTION - CSS FLEXBOX
+       ======================================================== */
+    .products-section {
+      background-color: #22252a;
+      padding: 80px 5%;
+      color: #fff;
+    }
+
+    .products-flex {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      gap: 30px;
+      justify-content: center;
+    }
+
+    .products-intro-card {
+      flex: 1;
+      border: 1px solid rgba(209, 180, 106, 0.4);
+      padding: 35px 25px;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .products-intro-card .subtitle {
+      font-family: 'Courgette', cursive;
+      color: var(--secondaryColor);
+      font-size: 24px;
+      margin-bottom: 5px;
+    }
+
+    .products-intro-card .title {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      margin-bottom: 15px;
+    }
+
+    .products-intro-card p {
+      font-size: 13px;
+      line-height: 1.6;
+      color: #ccc;
+      margin-bottom: 25px;
+    }
+
+    .btn-inventory {
+      align-self: flex-start;
+      border: 1px solid var(--primaryColor);
+      color: #8dbb2d;
+      padding: 8px 22px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: var(--mainTransition);
+    }
+
+    .btn-inventory:hover {
+      background-color: var(--primaryColor);
+      color: #fff;
+    }
+
+    .product-card {
+      flex: 1;
+      border: 1px solid rgba(209, 180, 106, 0.3);
+      border-radius: 8px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      transition: var(--mainTransition);
+    }
+
+    .product-card:hover {
+      border-color: var(--secondaryColor);
+      transform: translateY(-5px);
+    }
+
+    .product-img-box {
+      width: 100%;
+      height: 220px;
+      overflow: hidden;
+      border-radius: 6px;
+      margin-bottom: 20px;
+    }
+
+    .product-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--mainTransition);
+    }
+
+    .product-card:hover .product-img-box img {
+      transform: scale(1.08);
+    }
+
+    .product-name {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      color: #f1f1f1;
+    }
+
+    .product-price {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--secondaryColor);
+    }
+
+    /* ========================================================
+       6. SERVICES SECTION - CSS FLEXBOX
+       ======================================================== */
+    .services-section {
+      background-color: var(--mainWhite);
+      padding: 80px 5%;
+      text-align: center;
+    }
+
+    .services-header {
+      margin-bottom: 50px;
+    }
+
+    .services-header .subheading {
+      font-family: 'Courgette', cursive;
+      color: var(--primaryColor);
+      font-size: 26px;
+      margin-bottom: 5px;
+    }
+
+    .services-header .mainheading {
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--mainBlack);
+    }
+
+    .services-flex {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      gap: 30px;
+      justify-content: center;
+    }
+
+    .service-card {
+      flex: 1;
+      background-color: var(--primaryColor);
+      border-radius: 12px;
+      padding: 40px 25px;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 8px 20px rgba(107, 142, 35, 0.2);
+      transition: var(--mainTransition);
+    }
+
+    .service-card:hover {
+      transform: translateY(-8px);
+    }
+
+    .service-img-wrapper {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 4px solid #fff;
+      margin-bottom: 25px;
+    }
+
+    .service-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .service-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 25px;
+      letter-spacing: 1px;
+    }
+
+    .btn-readmore {
+      background-color: #fff;
+      color: #333;
+      padding: 8px 26px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    /* ========================================================
+       7. CONTACT SECTION - CSS FLEXBOX
+       ======================================================== */
+    .contact-section {
+      background-color: var(--mainGrey);
+      padding: 80px 5%;
+    }
+
+    .contact-flex {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      gap: 50px;
+      align-items: flex-start;
+    }
+
+    .contact-info-col {
+      flex: 1;
+    }
+
+    .contact-info-col h3.label {
+      font-family: 'Courgette', cursive;
+      color: var(--primaryColor);
+      font-size: 24px;
+      margin-bottom: 6px;
+    }
+
+    .contact-info-col p.val {
+      font-size: 13px;
+      font-weight: 700;
+      color: #222;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 30px;
+    }
+
+    .contact-form-box {
+      flex: 1.2;
+      background: #fff;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.05);
+    }
+
+    .contact-form-box h3.form-title {
+      font-family: 'Courgette', cursive;
+      color: var(--primaryColor);
+      font-size: 28px;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px 16px;
+      background: #f5f5f5;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #333;
+      outline: none;
+    }
+
+    .form-control:focus {
+      border-color: var(--primaryColor);
+      background: #fff;
+    }
+
+    textarea.form-control {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .btn-submit {
+      width: 100%;
+      background-color: var(--primaryColor);
+      color: #fff;
+      border: none;
+      padding: 14px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: var(--mainTransition);
+    }
+
+    .btn-submit:hover {
+      background-color: var(--primaryDark);
+    }
+
+    /* FOOTER */
+    .footer {
+      background: #191b1f;
+      color: #888;
+      text-align: center;
+      padding: 30px 20px;
+      font-size: 13px;
+    }
+
+    .footer a {
+      color: var(--secondaryColor);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. Header Navigation Flexbox -->
+  <header class="navbar">
+    <a href="#hero" class="brand-logo">
+      <img src="images/logo.png" alt="Tea Station Logo">
+      <span>TEA STATION</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#features">Đặc Điểm</a></li>
+      <li><a href="#about">Về Chúng Tôi</a></li>
+      <li><a href="#products">Sản Phẩm</a></li>
+      <li><a href="#services">Dịch Vụ</a></li>
+      <li><a href="#contact">Liên Hệ</a></li>
+    </ul>
+  </header>
+
+  <!-- 2. Hero Header Flexbox (display: flex; flex-direction: column;) -->
+  <header class="header" id="hero">
+    <h3 class="header-subtitle">Over one hundred flavors of tea</h3>
+    <h1 class="header-title">SPECIALLY CRAFTED TEA</h1>
+    <a href="#features" class="btn-explore">KHÁM PHÁ NGAY</a>
+  </header>
+
+  <!-- 3. Features Section Flexbox (.feature_item gap: 2rem;) -->
+  <section class="features-container" id="features">
+    <article class="feature_item">
+      <i class="fas fa-mug-hot feature-icon"></i>
+      <h4 class="feature-title">MADE WITH LOVE</h4>
+      <p class="feature-text">Our tea is made with love, from the collection of the leaves to the brewing.</p>
+    </article>
+    <article class="feature_item highlight">
+      <i class="fas fa-spa feature-icon"></i>
+      <h4 class="feature-title">RELAXATION</h4>
+      <p class="feature-text">Set aside anxiety and relax after a hard day with a cup of hot tea in your hands.</p>
+    </article>
+    <article class="feature_item">
+      <i class="fas fa-bolt feature-icon"></i>
+      <h4 class="feature-title">ENERGY</h4>
+      <p class="feature-text">Our tea will energize you with vitamins and invigorate the rest of the day.</p>
+    </article>
+    <article class="feature_item">
+      <i class="fas fa-book-open feature-icon"></i>
+      <h4 class="feature-title">FAMILY RECIPE</h4>
+      <p class="feature-text">All our recipes are passed down from generation to generation for a long time.</p>
+    </article>
+  </section>
+
+  <!-- 4. About Section Flexbox -->
+  <section class="about-section" id="about">
+    <div class="about-img-container">
+      <img src="images/about-tea.jpg" alt="About Tea Station" class="about-img">
+    </div>
+    <div class="about-info">
+      <h3 class="heading-first">About Our</h3>
+      <h2 class="heading-second">TEA STATION</h2>
+      <p class="about-text">
+        Once upon a time we only had a couple of teapots and enjoyed tea only with our family. Over time, we were able to afford to buy a small tea plantation.
+      </p>
+      <p class="about-text">
+        Now we have a whole teahouse and we delight many people with delicious and hot tea. We serve black long tea, relaxing green and jasmine tea, tea with spices and many others.
+      </p>
+      <a href="#products" class="btn-learn">LEARN MORE</a>
+    </div>
+  </section>
+
+  <!-- 5. Products Section Flexbox -->
+  <section class="products-section" id="products">
+    <div class="products-flex">
+      <div class="products-intro-card">
+        <h4 class="subtitle">Check Out</h4>
+        <h2 class="title">OUR PRODUCTS</h2>
+        <p>Our assortment includes long tea, relaxing and invigorating green tea with spices, lemon juice, jasmine, cinnamon and anise, milk tea and many others.</p>
+        <a href="#services" class="btn-inventory">INVENTORY</a>
+      </div>
+      <div class="product-card">
+        <div class="product-img-box">
+          <img src="images/product-1.jpg" alt="Black Long Tea">
+        </div>
+        <h4 class="product-name">BLACK LONG TEA</h4>
+        <span class="product-price">$ 9.99</span>
+      </div>
+      <div class="product-card">
+        <div class="product-img-box">
+          <img src="images/product-2.jpg" alt="Green Tea with Jasmine">
+        </div>
+        <h4 class="product-name">GREEN TEA WITH JASMINE</h4>
+        <span class="product-price">$ 4.99</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Services Section Flexbox -->
+  <section class="services-section" id="services">
+    <div class="services-header">
+      <h3 class="subheading">Explore</h3>
+      <h2 class="mainheading">OUR SERVICES</h2>
+    </div>
+    <div class="services-flex">
+      <div class="service-card">
+        <div class="service-img-wrapper">
+          <img src="images/service-1.jpg" alt="Custom Recipe Service">
+        </div>
+        <h4 class="service-title">Custom Recipe Service</h4>
+        <a href="#contact" class="btn-readmore">Read More</a>
+      </div>
+      <div class="service-card">
+        <div class="service-img-wrapper">
+          <img src="images/service-2.jpg" alt="Home Delivery Service">
+        </div>
+        <h4 class="service-title">Home Delivery Service</h4>
+        <a href="#contact" class="btn-readmore">Read More</a>
+      </div>
+      <div class="service-card">
+        <div class="service-img-wrapper">
+          <img src="images/service-3.jpg" alt="Tea Aging Service">
+        </div>
+        <h4 class="service-title">Tea Aging Service</h4>
+        <a href="#contact" class="btn-readmore">Read More</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Contact Section Flexbox -->
+  <section class="contact-section" id="contact">
+    <div class="contact-flex">
+      <div class="contact-info-col">
+        <h3 class="label">address</h3>
+        <p class="val">523 N FAIRFAX AVE<br>LOS ANGELES, CA 90048</p>
+        <h3 class="label">email</h3>
+        <p class="val">EMAIL@EMAIL.COM</p>
+        <h3 class="label">telephone</h3>
+        <p class="val">+ 123 456 789</p>
+      </div>
+      <div class="contact-form-box">
+        <h3 class="form-title">contact us</h3>
+        <form onsubmit="event.preventDefault(); alert('Cảm ơn bạn đã gửi liên hệ!');">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="NAME" required>
+          </div>
+          <div class="form-group">
+            <input type="email" class="form-control" placeholder="EMAIL" required>
+          </div>
+          <div class="form-group">
+            <textarea class="form-control" placeholder="MESSAGE" rows="4" required></textarea>
+          </div>
+          <button type="submit" class="btn-submit">SUBMIT HERE</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2026 Tea Station. Xây dựng hoàn toàn bằng CSS Flexbox. FPT Polytechnic Lab 6.1.</p>
+  </footer>
+
+</body>
+</html>
+

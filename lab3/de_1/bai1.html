@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 1: Ứng dụng Display</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f0f2f5;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: #ffffff;
+            width: 100%;
+            min-height: 70vh;
+            padding: 80px 30px;
+            text-align: center;
+        }
+
+        .title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #111111;
+            margin-bottom: 25px;
+        }
+
+        .short-line {
+            width: 70px;
+            height: 4px;
+            background-color: #7898ed;
+            border-radius: 2px;
+            margin: -18px auto 25px;
+        }
+
+        .description {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #333333;
+            text-align: justify;
+            text-align-last: center;
+            display: inline-block;
+            max-width: 100%;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 60px 20px;
+            }
+
+            .title {
+                font-size: 24px;
+            }
+
+            .description {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2 class="title">Section Title</h2>
+
+        <div class="short-line"></div>
+
+        <p class="description">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Tempora nulla, reprehenderit sapiente aperiam nesciunt ab
+            officia pariatur? Modi necessitatibus at, nostrum repellendus
+            voluptate eveniet ad, pariatur iusto voluptates natus adipisci!
+        </p>
+    </div>
+</body>
+</html>
