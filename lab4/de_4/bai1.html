@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tea Station | Lab 8.2 - Responsive Website</title>
+  
+  <!-- SEO & Social Meta -->
+  <meta name="description" content="Tea Station - Thưởng thức hơn 100 hương vị trà đặc sản tuyển chọn. Giao diện chuẩn Responsive thích ứng mọi kích thước màn hình.">
+  <meta name="keywords" content="Tea Station, Specialty Tea, Trà ngon, Lab 8.2, Responsive">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Fonts: Catamaran & Grand Hotel & Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@400;600;700;800&family=Grand+Hotel&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-color: #698238;
+      --primary-hover: #556c2c;
+      --dark-color: #242424;
+      --slate-dark: #25282a;
+      --light-grey: #f1f5f8;
+      --white: #ffffff;
+      --font-title: 'Catamaran', sans-serif;
+      --font-body: 'Montserrat', sans-serif;
+      --font-script: 'Grand Hotel', cursive;
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--white);
+      color: var(--dark-color);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    img { width: 100%; display: block; object-fit: cover; }
+
+    .section-center {
+      width: 90vw;
+      max-width: 1170px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .section-subtitle {
+      font-family: var(--font-script);
+      font-size: 2.3rem;
+      color: var(--primary-color);
+      display: block;
+    }
+
+    .section-heading {
+      font-family: var(--font-title);
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--dark-color);
+    }
+
+    /* ==========================================================
+       SIDEBAR OVERLAY MENU (RESPONSIVE CHUẨN ĐỀ 4)
+       ========================================================== */
+    .sidebar-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+    }
+
+    .sidebar-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 280px;
+      height: 100%;
+      background: #ffffff;
+      z-index: 2001;
+      transform: translateX(-100%);
+      transition: transform 0.35s ease;
+      box-shadow: 4px 0 20px rgba(0,0,0,0.25);
+      padding: 30px 25px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .sidebar.active {
+      transform: translateX(0);
+    }
+
+    .sidebar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      border-bottom: 2px solid #f1f5f9;
+      padding-bottom: 15px;
+    }
+
+    .sidebar-title {
+      font-family: var(--font-script);
+      font-size: 28px;
+      color: var(--primary-color);
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: #64748b;
+      transition: var(--transition);
+    }
+
+    .close-btn:hover { color: #dc2626; }
+
+    .sidebar-links {
+      list-style: none;
+    }
+
+    .sidebar-links li {
+      margin-bottom: 18px;
+    }
+
+    .sidebar-links a {
+      font-family: var(--font-title);
+      font-size: 16px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--dark-color);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: var(--transition);
+    }
+
+    .sidebar-links a:hover {
+      color: var(--primary-color);
+      transform: translateX(6px);
+    }
+
+    /* Nút Hamburger Menu cố định */
+    .nav-toggle-btn {
+      position: fixed;
+      top: 25px;
+      left: 25px;
+      background: #ffffff;
+      border: none;
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      font-size: 1.4rem;
+      color: var(--dark-color);
+      transition: var(--transition);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-toggle-btn:hover {
+      background: var(--primary-color);
+      color: #fff;
+    }
+
+    /* ==========================================================
+       1. HERO BANNER (HÌNH 1 & 2 TRONG ĐỀ 4)
+       ========================================================== */
+    .hero-banner {
+      min-height: 100vh;
+      background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.55)), url('images/hero-bg.jpg') center/cover no-repeat fixed;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 1.5rem;
+      position: relative;
+    }
+
+    .hero-content {
+      max-width: 800px;
+    }
+
+    .hero-subtitle {
+      font-family: var(--font-script);
+      font-size: 3.2rem;
+      color: #8fa758;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-title {
+      font-family: var(--font-title);
+      font-size: 3.4rem;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      text-shadow: 2px 2px 10px rgba(0,0,0,0.6);
+    }
+
+    .hero-btn {
+      display: inline-block;
+      font-family: var(--font-title);
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #c9e29a;
+      background: rgba(105, 130, 56, 0.4);
+      border: 3px double #8fa758;
+      padding: 0.85rem 2.4rem;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .hero-btn:hover {
+      background: var(--primary-color);
+      color: var(--white);
+      border-color: var(--white);
+    }
+
+    /* ==========================================================
+       2. SKILLS (HÌNH 3 & 4 TRONG ĐỀ 4)
+       Desktop: 4 Cột | Mobile: 1 Cột Xếp Chồng
+       ========================================================== */
+    .skills-section {
+      background: var(--white);
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 2px solid #e2e8f0;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .skill-card {
+      padding: 3rem 1.5rem;
+      text-align: center;
+      border-right: 1px solid #e2e8f0;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .skill-card:last-child {
+      border-right: none;
+    }
+
+    .skill-title {
+      font-family: var(--font-title);
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      color: var(--primary-color);
+    }
+
+    .skill-text {
+      font-size: 0.95rem;
+      color: #64748b;
+      line-height: 1.6;
+    }
+
+    .skill-card.active-card {
+      background: var(--primary-color);
+      color: var(--white);
+    }
+
+    .skill-card.active-card .skill-title { color: #f1f5f8; }
+    .skill-card.active-card .skill-text { color: #e2f0d9; }
+
+    /* ==========================================================
+       3. ABOUT (HÌNH 5 & 6 TRONG ĐỀ 4)
+       Desktop: 2 Cột | Mobile: 1 Cột Ảnh Trên Nội Dung Dưới
+       ========================================================== */
+    .about-section {
+      padding: 5rem 0;
+      background: #fdfdfd;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3.5rem;
+      align-items: center;
+    }
+
+    .about-img-wrap {
+      position: relative;
+      background: var(--primary-color);
+      border-radius: 20px;
+      padding-bottom: 140px;
+      box-shadow: 0 10px 25px rgba(105, 130, 56, 0.25);
+    }
+
+    .about-img-wrap img {
+      border-radius: 20px 20px 0 0;
+      height: 320px;
+    }
+
+    .about-info {
+      padding: 1rem 0;
+    }
+
+    .about-info .section-subtitle { text-align: left; }
+    .about-info .section-heading { text-align: left; margin-bottom: 1.5rem; }
+
+    .about-text {
+      font-size: 0.98rem;
+      color: #475569;
+      margin-bottom: 1.2rem;
+      line-height: 1.8;
+    }
+
+    .btn-outline-green {
+      display: inline-block;
+      font-family: var(--font-title);
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--white);
+      background: var(--primary-color);
+      border: 3px double #4e6325;
+      padding: 0.7rem 1.8rem;
+      margin-top: 1rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-outline-green:hover {
+      background: var(--primary-hover);
+    }
+
+    /* ==========================================================
+       4. PRODUCTS (HÌNH 7 & 8 TRONG ĐỀ 4)
+       Desktop: 3 Cột (1fr 1.2fr 1.2fr) | Mobile: 1 Cột Xếp Dọc
+       ========================================================== */
+    .products-section {
+      padding: 5rem 0;
+      background: var(--slate-dark);
+      color: var(--white);
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr 1.2fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+
+    .products-info .section-subtitle { text-align: left; color: #a3c75d; }
+    .products-info .section-heading { text-align: left; color: var(--white); margin-bottom: 1.2rem; }
+    .products-info p { color: #cbd5e1; font-size: 0.95rem; line-height: 1.8; margin-bottom: 1.5rem; }
+
+    .product-card {
+      border-bottom: 3px solid var(--primary-color);
+      padding-bottom: 1.2rem;
+      transition: var(--transition);
+    }
+
+    .product-img-box {
+      border-radius: 18px;
+      overflow: hidden;
+      margin-bottom: 1.2rem;
+    }
+
+    .product-img-box img {
+      height: 220px;
+      transition: transform 0.4s ease;
+    }
+
+    .product-card:hover .product-img-box img {
+      transform: scale(1.06);
+    }
+
+    .product-name {
+      font-family: var(--font-title);
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      color: var(--white);
+    }
+
+    .product-price {
+      font-family: var(--font-title);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #9ecc52;
+    }
+
+    /* ==========================================================
+       5. SERVICES (HÌNH 9 & 10 TRONG ĐỀ 4)
+       Desktop: 3 Cột | Mobile: 1 Cột Đơn
+       ========================================================== */
+    .services-section {
+      padding: 5rem 0;
+      background: #eef2f5;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .service-card {
+      background: var(--white);
+      border-radius: 26px;
+      overflow: hidden;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+      border: 4px solid #fff;
+      outline: 2px solid #b5cc8a;
+      transition: var(--transition);
+    }
+
+    .service-card:hover { transform: translateY(-6px); }
+
+    .service-img-box { height: 240px; overflow: hidden; }
+    .service-img-box img { height: 100%; transition: transform 0.4s ease; }
+    .service-card:hover .service-img-box img { transform: scale(1.06); }
+
+    .service-bottom {
+      background: var(--primary-color);
+      padding: 2.2rem 1.5rem;
+      text-align: center;
+      color: var(--white);
+    }
+
+    .service-title {
+      font-family: var(--font-title);
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: capitalize;
+    }
+
+    .service-btn {
+      display: inline-block;
+      margin-top: 10px;
+      font-family: var(--font-title);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--white);
+      border: 2px solid var(--white);
+      padding: 0.45rem 1.4rem;
+      border-radius: 20px;
+      transition: var(--transition);
+    }
+
+    .service-btn:hover { background: var(--white); color: var(--primary-color); }
+
+    /* ==========================================================
+       6. CONTACT (HÌNH 11 & 12 TRONG ĐỀ 4)
+       Desktop: 2 Cột | Mobile: 1 Cột Dọc
+       ========================================================== */
+    .contact-section {
+      padding: 5rem 0;
+      background: #ffffff;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3.5rem;
+      align-items: start;
+    }
+
+    .contact-item { margin-bottom: 2rem; }
+    .contact-subtitle { font-family: var(--font-script); font-size: 2.2rem; color: var(--primary-color); margin-bottom: 0.3rem; }
+    .contact-detail { font-family: var(--font-title); font-size: 1rem; font-weight: 700; letter-spacing: 2px; color: #334155; text-transform: uppercase; }
+
+    .contact-form-box {
+      background: var(--white);
+      padding: 2.5rem;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      border: 1px solid #e2e8f0;
+    }
+
+    .contact-form-title { font-family: var(--font-script); font-size: 2.5rem; color: #475569; text-align: center; margin-bottom: 1.5rem; }
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label { display: block; font-family: var(--font-title); font-size: 0.85rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #475569; margin-bottom: 0.4rem; }
+    .form-control { width: 100%; padding: 10px 14px; background: #f0f4f8; border: 1px solid transparent; border-radius: 4px; font-family: inherit; font-size: 0.95rem; }
+    .form-control:focus { outline: none; background: #fff; border-color: var(--primary-color); }
+
+    .btn-submit {
+      width: 100%; font-family: var(--font-title); font-size: 1rem; font-weight: 700; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--white); background: var(--primary-color); border: none;
+      padding: 1rem; border-radius: 4px; cursor: pointer; transition: var(--transition);
+    }
+    .btn-submit:hover { background: var(--primary-hover); }
+
+    /* FOOTER */
+    .footer {
+      background: var(--slate-dark);
+      color: var(--white);
+      padding: 3rem 0;
+      text-align: center;
+    }
+
+    .footer-social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .social-icon { color: var(--white); font-size: 1.5rem; transition: var(--transition); }
+    .social-icon:hover { color: var(--primary-color); }
+
+    /* ==========================================================
+       MEDIA QUERIES RESPONSIVE HOÀN TOÀN TƯƠNG THÍCH ĐỀ 4
+       ========================================================== */
+    @media screen and (max-width: 992px) {
+      .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .skill-card:nth-child(2) {
+        border-right: none;
+      }
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+      .products-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .services-grid {
+        grid-template-columns: 1fr;
+        max-width: 450px;
+        margin: 0 auto;
+      }
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      .hero-title {
+        font-size: 2.4rem;
+        letter-spacing: 2px;
+      }
+      .hero-subtitle {
+        font-size: 2.2rem;
+      }
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+      .skill-card {
+        border-right: none;
+        border-bottom: 1px solid #e2e8f0;
+        padding: 2.5rem 1.5rem;
+      }
+      .skill-card:last-child {
+        border-bottom: none;
+      }
+      .about-img-wrap {
+        padding-bottom: 80px;
+      }
+      .contact-form-box {
+        padding: 1.8rem 1.2rem;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      .hero-title {
+        font-size: 1.9rem;
+      }
+      .hero-subtitle {
+        font-size: 1.8rem;
+      }
+      .section-heading {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nút mở Menu Sidebar (Hamburger) -->
+  <button class="nav-toggle-btn" id="navBtn" aria-label="Toggle Sidebar Menu">
+    <i class="fas fa-bars"></i>
+  </button>
+
+  <!-- Sidebar Overlay & Menu -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <aside class="sidebar" id="sidebar">
+    <div>
+      <div class="sidebar-header">
+        <span class="sidebar-title">Tea Station</span>
+        <button class="close-btn" id="closeBtn" aria-label="Close Sidebar">&times;</button>
+      </div>
+      <ul class="sidebar-links">
+        <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="#skills"><i class="fas fa-star"></i> Skills</a></li>
+        <li><a href="#about"><i class="fas fa-info-circle"></i> About</a></li>
+        <li><a href="#products"><i class="fas fa-mug-hot"></i> Products</a></li>
+        <li><a href="#services"><i class="fas fa-concierge-bell"></i> Services</a></li>
+        <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+      </ul>
+    </div>
+    <div style="font-size: 12px; color: #94a3b8; text-align: center;">
+      Tea Station • Lab 8.2
+    </div>
+  </aside>
+
+  <!-- 1. HERO BANNER -->
+  <header class="hero-banner" id="home">
+    <div class="hero-content">
+      <h3 class="hero-subtitle">Over one hundred flavors of tea</h3>
+      <h1 class="hero-title">SPECIALLY CRAFTED TEA</h1>
+      <a href="#products" class="hero-btn">EXPLORE</a>
+    </div>
+  </header>
+
+  <!-- 2. SKILLS -->
+  <section class="skills-section" id="skills">
+    <div class="skills-grid">
+      <article class="skill-card">
+        <h3 class="skill-title">MADE WITH LOVE</h3>
+        <p class="skill-text">Our tea is made with love, from the collection of the leaves to the brewing.</p>
+      </article>
+
+      <article class="skill-card">
+        <h3 class="skill-title">RELAXATION</h3>
+        <p class="skill-text">Set aside anxiety and relax after a hard day with a cup of hot tea in your hands.</p>
+      </article>
+
+      <article class="skill-card active-card">
+        <h3 class="skill-title">ENERGY</h3>
+        <p class="skill-text">Our tea will energize you with vitamins and invigorate the rest of the day.</p>
+      </article>
+
+      <article class="skill-card">
+        <h3 class="skill-title">FAMILY RECIPE</h3>
+        <p class="skill-text">All our recipes are passed down from generation to generation for a long time.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- 3. ABOUT -->
+  <section class="about-section" id="about">
+    <div class="section-center about-grid">
+      <div class="about-img-wrap">
+        <img src="images/about-tea.jpg" alt="About Our Tea Station">
+      </div>
+
+      <div class="about-info">
+        <span class="section-subtitle">About Our</span>
+        <h2 class="section-heading">TEA STATION</h2>
+        <p class="about-text">
+          Once upon a time we only had a couple of teapots and enjoyed tea only with our family. Over time, we were able to afford to buy a small tea plantation
+        </p>
+        <p class="about-text">
+          Now we have a whole teahouse and we delight many people with delicious and hot tea. We serve black long tea, relaxing green and jasmine tea, tea with spices and many others.
+        </p>
+        <a href="#products" class="btn-outline-green">LEARN MORE</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. PRODUCTS -->
+  <section class="products-section" id="products">
+    <div class="section-center products-grid">
+      <div class="products-info">
+        <span class="section-subtitle">Check Out</span>
+        <h2 class="section-heading">OUR PRODUCTS</h2>
+        <p>
+          Our assortment includes long tea, relaxing and invigorating green tea with spices, lemon juice, jasmine, cinnamon and anise, milk tea and many others.
+        </p>
+        <a href="#services" class="btn-outline-green" style="border-color: #8fa758;">INVENTORY</a>
+      </div>
+
+      <article class="product-card">
+        <div class="product-img-box">
+          <img src="images/product-1.jpg" alt="Black Long Tea">
+        </div>
+        <h3 class="product-name">BLACK LONG TEA</h3>
+        <span class="product-price">$ 3.99</span>
+      </article>
+
+      <article class="product-card">
+        <div class="product-img-box">
+          <img src="images/product-2.jpg" alt="Green Tea With Jasmine">
+        </div>
+        <h3 class="product-name">GREEN TEA WITH JASMINE</h3>
+        <span class="product-price">$ 4.99</span>
+      </article>
+    </div>
+  </section>
+
+  <!-- 5. SERVICES -->
+  <section class="services-section" id="services">
+    <div class="section-title">
+      <span class="section-subtitle">Explore</span>
+      <h2 class="section-heading">OUR SERVICES</h2>
+    </div>
+
+    <div class="section-center services-grid">
+      <article class="service-card">
+        <div class="service-img-box">
+          <img src="images/service-1.jpg" alt="Custom Recipe Service">
+        </div>
+        <div class="service-bottom">
+          <h3 class="service-title">Custom Recipe Service</h3>
+        </div>
+      </article>
+
+      <article class="service-card">
+        <div class="service-img-box">
+          <img src="images/service-2.jpg" alt="Home Delivery Service">
+        </div>
+        <div class="service-bottom">
+          <h3 class="service-title">Home Delivery Service</h3>
+          <a href="#contact" class="service-btn">Read More</a>
+        </div>
+      </article>
+
+      <article class="service-card">
+        <div class="service-img-box">
+          <img src="images/service-3.jpg" alt="Tea Aging Service">
+        </div>
+        <div class="service-bottom">
+          <h3 class="service-title">Tea Aging Service</h3>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 6. CONTACT -->
+  <section class="contact-section" id="contact">
+    <div class="section-center contact-grid">
+      <div class="contact-info">
+        <div class="contact-item">
+          <h4 class="contact-subtitle">address</h4>
+          <p class="contact-detail">523 N FAIRFAX AVE<br>LOS ANGELES, CA 90048</p>
+        </div>
+
+        <div class="contact-item">
+          <h4 class="contact-subtitle">email</h4>
+          <p class="contact-detail">EMAIL@EMAIL.COM</p>
+        </div>
+
+        <div class="contact-item">
+          <h4 class="contact-subtitle">telephone</h4>
+          <p class="contact-detail">+ 123 456 789</p>
+        </div>
+      </div>
+
+      <div class="contact-form-box">
+        <h3 class="contact-form-title">contact us</h3>
+        <form onsubmit="event.preventDefault(); alert('Cảm ơn bạn đã gửi liên hệ!');">
+          <div class="form-group">
+            <label for="name">NAME</label>
+            <input type="text" id="name" class="form-control" required placeholder="Nhập tên...">
+          </div>
+          <div class="form-group">
+            <label for="email">EMAIL</label>
+            <input type="email" id="email" class="form-control" required placeholder="Nhập email...">
+          </div>
+          <div class="form-group">
+            <label for="message">MESSAGE</label>
+            <textarea id="message" class="form-control" rows="4" required placeholder="Nội dung..."></textarea>
+          </div>
+          <button type="submit" class="btn-submit">SUBMIT HERE</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-social-icons">
+      <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+      <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+    </div>
+    <p style="font-size: 14px; color: #94a3b8;">
+      &copy; 2026 <strong>Tea Station</strong>. Lab 8.2: Responsive Web Design. All rights reserved.
+    </p>
+  </footer>
+
+  <script>
+    const navBtn = document.getElementById('navBtn');
+    const closeBtn = document.getElementById('closeBtn');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+
+    function openSidebar() {
+      sidebar.classList.add('active');
+      overlay.classList.add('active');
+    }
+
+    function closeSidebar() {
+      sidebar.classList.remove('active');
+      overlay.classList.remove('active');
+    }
+
+    navBtn.addEventListener('click', openSidebar);
+    closeBtn.addEventListener('click', closeSidebar);
+    overlay.addEventListener('click', closeSidebar);
+
+    document.querySelectorAll('.sidebar-links a').forEach(link => {
+      link.addEventListener('click', closeSidebar);
+    });
+  </script>
+</body>
+</html>

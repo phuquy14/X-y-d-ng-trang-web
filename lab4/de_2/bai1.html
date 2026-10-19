@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tea Station | Lab 7.2 - Tích Hợp Tiện Ích & Slideshow</title>
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Fonts: Catamaran & Grand Hotel & Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@400;600;700;800&family=Grand+Hotel&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Swiper.js CSS (Thư viện Slideshow không cần viết code) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+  <style>
+    :root {
+      --primary-color: #698238;
+      --primary-hover: #556c2c;
+      --dark-color: #242424;
+      --slate-dark: #25282a;
+      --light-grey: #f8fafc;
+      --white: #ffffff;
+      --font-title: 'Catamaran', sans-serif;
+      --font-body: 'Montserrat', sans-serif;
+      --font-script: 'Grand Hotel', cursive;
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--white);
+      color: var(--dark-color);
+      line-height: 1.6;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    img { width: 100%; display: block; object-fit: cover; }
+
+    .section-center {
+      width: 90vw;
+      max-width: 1170px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .section-subtitle {
+      font-family: var(--font-script);
+      font-size: 2.3rem;
+      color: var(--primary-color);
+      display: block;
+    }
+
+    .section-heading {
+      font-family: var(--font-title);
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--dark-color);
+    }
+
+    /* ==========================================================
+       TIỆN ÍCH 1: SLIDESHOW HERO BANNER (SWIPER JS)
+       ========================================================== */
+    .hero-slider-wrap {
+      position: relative;
+      height: 85vh;
+      min-height: 520px;
+      background: #000;
+    }
+
+    .swiper {
+      width: 100%;
+      height: 100%;
+    }
+
+    .swiper-slide {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .swiper-slide::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    .slide-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      padding: 0 20px;
+      color: #fff;
+    }
+
+    .slide-subtitle {
+      font-family: var(--font-script);
+      font-size: 3.2rem;
+      color: #a3c75d;
+      margin-bottom: 0.5rem;
+    }
+
+    .slide-title {
+      font-family: var(--font-title);
+      font-size: 3.4rem;
+      font-weight: 800;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      text-shadow: 2px 2px 10px rgba(0,0,0,0.6);
+    }
+
+    .slide-btn {
+      display: inline-block;
+      font-family: var(--font-title);
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #c9e29a;
+      background: rgba(105, 130, 56, 0.4);
+      border: 3px double #8fa758;
+      padding: 0.85rem 2.4rem;
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+
+    .slide-btn:hover {
+      background: var(--primary-color);
+      color: #fff;
+      border-color: #fff;
+    }
+
+    .swiper-button-next, .swiper-button-prev {
+      color: #fff !important;
+      background: rgba(0,0,0,0.4);
+      width: 48px !important;
+      height: 48px !important;
+      border-radius: 50%;
+      transition: var(--transition);
+    }
+
+    .swiper-button-next:hover, .swiper-button-prev:hover {
+      background: var(--primary-color);
+    }
+
+    .swiper-pagination-bullet-active {
+      background: var(--primary-color) !important;
+      width: 25px !important;
+      border-radius: 6px !important;
+    }
+
+    /* ==========================================================
+       TIỆN ÍCH 2: NÚT LIKE VÀ SHARE MẠNG XÃ HỘI
+       ========================================================== */
+    .social-bar {
+      background: #f1f5f9;
+      padding: 16px 0;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .social-bar-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .social-bar-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #475569;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .social-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-like {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      background: #1877f2;
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-like:hover { background: #0d65d9; }
+    .btn-like.liked { background: #10b981; }
+
+    .btn-share {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      background: #334155;
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-share:hover { background: #1e293b; }
+
+    .share-icon-group {
+      display: flex;
+      gap: 8px;
+    }
+
+    .share-link-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 14px;
+      transition: var(--transition);
+    }
+
+    .share-fb { background: #1877f2; }
+    .share-tw { background: #000; }
+    .share-pin { background: #e60023; }
+
+    .share-link-icon:hover { transform: translateY(-2px); }
+
+    /* SKILLS */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 2px solid #e2e8f0;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .skill-card {
+      padding: 3rem 1.5rem;
+      text-align: center;
+      border-right: 1px solid #e2e8f0;
+    }
+
+    .skill-card:last-child { border-right: none; }
+    .skill-card.active-card { background: var(--primary-color); color: #fff; }
+    .skill-title { font-family: var(--font-title); font-size: 1.15rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1rem; color: var(--primary-color); }
+    .skill-card.active-card .skill-title { color: #fff; }
+    .skill-text { font-size: 0.95rem; color: #64748b; line-height: 1.6; }
+    .skill-card.active-card .skill-text { color: #e2f0d9; }
+
+    /* ==========================================================
+       TIỆN ÍCH 3 & 4: VIDEO YOUTUBE & BÀI VIẾT (POST)
+       ========================================================== */
+    .media-section {
+      padding: 5rem 0;
+      background: #f8fafc;
+    }
+
+    .media-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    /* Video Player */
+    .video-card {
+      background: #fff;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+      border: 1px solid #e2e8f0;
+    }
+
+    .video-wrap {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 */
+      height: 0;
+      overflow: hidden;
+    }
+
+    .video-wrap iframe {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%; border: 0;
+    }
+
+    .video-details {
+      padding: 22px;
+    }
+
+    .video-tag {
+      display: inline-block;
+      background: #fee2e2;
+      color: #dc2626;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .video-details h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--dark-color);
+    }
+
+    .video-details p {
+      font-size: 13.5px;
+      color: #64748b;
+    }
+
+    /* Social Post Card */
+    .social-post-card {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+      border: 1px solid #e2e8f0;
+      overflow: hidden;
+    }
+
+    .post-header {
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .post-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .author-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--primary-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 18px;
+    }
+
+    .author-details h4 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--dark-color);
+    }
+
+    .author-details span {
+      font-size: 12px;
+      color: #94a3b8;
+    }
+
+    .post-body {
+      padding: 16px 20px;
+      font-size: 14px;
+      color: #334155;
+    }
+
+    .post-img {
+      height: 200px;
+      overflow: hidden;
+    }
+
+    .post-stats {
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #64748b;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .post-action-bar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      text-align: center;
+      padding: 8px 0;
+    }
+
+    .post-action-btn {
+      background: none;
+      border: none;
+      padding: 8px;
+      color: #64748b;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: var(--transition);
+    }
+
+    .post-action-btn:hover {
+      background: #f1f5f9;
+      color: var(--primary-color);
+    }
+
+    /* ==========================================================
+       TIỆN ÍCH 5: COMMENT PLUGIN
+       ========================================================== */
+    .comments-section {
+      padding: 5rem 0;
+      background: #fff;
+    }
+
+    .comments-box {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #f8fafc;
+      padding: 30px;
+      border-radius: 14px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+
+    .comments-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .comment-form {
+      margin-bottom: 30px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .comment-form .full {
+      grid-column: span 2;
+    }
+
+    .comment-input {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 14px;
+    }
+
+    .comment-input:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(105, 130, 56, 0.15);
+    }
+
+    .btn-comment {
+      grid-column: span 2;
+      background: var(--primary-color);
+      color: #fff;
+      border: none;
+      padding: 12px;
+      border-radius: 6px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-comment:hover {
+      background: var(--primary-hover);
+    }
+
+    .comment-item {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .comment-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #cbd5e1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #475569;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .comment-bubble {
+      flex-grow: 1;
+      background: #fff;
+      padding: 14px 18px;
+      border-radius: 10px;
+      border: 1px solid #e2e8f0;
+    }
+
+    .comment-meta {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+
+    .author-name {
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--dark-color);
+    }
+
+    .time-stamp {
+      font-size: 12px;
+      color: #94a3b8;
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--slate-dark);
+      color: var(--white);
+      padding: 3rem 0;
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .skills-grid { grid-template-columns: repeat(2, 1fr); }
+      .media-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .skills-grid { grid-template-columns: 1fr; }
+      .comment-form { grid-template-columns: 1fr; }
+      .comment-form .full { grid-column: span 1; }
+      .btn-comment { grid-column: span 1; }
+      .slide-title { font-size: 2.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TIỆN ÍCH 1: SLIDESHOW VÀO PROJECT (SWIPER JS) -->
+  <header class="hero-slider-wrap">
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide" style="background-image: url('images/hero-bg.jpg');">
+          <div class="slide-content">
+            <h3 class="slide-subtitle">Over one hundred flavors of tea</h3>
+            <h1 class="slide-title">SPECIALLY CRAFTED TEA</h1>
+            <a href="#media" class="slide-btn">EXPLORE</a>
+          </div>
+        </div>
+        <div class="swiper-slide" style="background-image: url('images/about-tea.jpg');">
+          <div class="slide-content">
+            <h3 class="slide-subtitle">Búp trà hữu cơ nguyên chất</h3>
+            <h1 class="slide-title">TINH HOA TRÀ VIỆT</h1>
+            <a href="#comments" class="slide-btn">ĐÁNH GIÁ</a>
+          </div>
+        </div>
+        <div class="swiper-slide" style="background-image: url('images/service-1.jpg');">
+          <div class="slide-content">
+            <h3 class="slide-subtitle">Công thức ủ men gia truyền</h3>
+            <h1 class="slide-title">HƯƠNG VỊ ĐẬM ĐÀ</h1>
+            <a href="#media" class="slide-btn">XEM VIDEO</a>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </header>
+
+  <!-- TIỆN ÍCH 2: NÚT LIKE VÀ SHARE -->
+  <section class="social-bar">
+    <div class="section-center social-bar-content">
+      <div class="social-bar-title">
+        <i class="fas fa-heart" style="color: #ef4444;"></i>
+        <span>Yêu thích hương vị Tea Station? Hãy ủng hộ và chia sẻ cùng bạn bè:</span>
+      </div>
+
+      <div class="social-actions">
+        <button id="likeBtn" class="btn-like" onclick="toggleLike()">
+          <i class="fas fa-thumbs-up"></i>
+          <span>Thích</span>
+          <strong id="likeCount">1.240</strong>
+        </button>
+
+        <button class="btn-share" onclick="handleShare()">
+          <i class="fas fa-share-alt"></i>
+          <span>Chia sẻ (<span id="shareCount">358</span>)</span>
+        </button>
+
+        <div class="share-icon-group">
+          <a href="https://facebook.com" target="_blank" class="share-link-icon share-fb" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://twitter.com" target="_blank" class="share-link-icon share-tw" title="Twitter / X"><i class="fab fa-x-twitter"></i></a>
+          <a href="https://pinterest.com" target="_blank" class="share-link-icon share-pin" title="Pinterest"><i class="fab fa-pinterest"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS / FEATURES -->
+  <section class="skills-section">
+    <div class="skills-grid">
+      <article class="skill-card">
+        <h3 class="skill-title">MADE WITH LOVE</h3>
+        <p class="skill-text">Our tea is made with love, from the collection of the leaves to the brewing.</p>
+      </article>
+
+      <article class="skill-card">
+        <h3 class="skill-title">RELAXATION</h3>
+        <p class="skill-text">Set aside anxiety and relax after a hard day with a cup of hot tea in your hands.</p>
+      </article>
+
+      <article class="skill-card active-card">
+        <h3 class="skill-title">ENERGY</h3>
+        <p class="skill-text">Our tea will energize you with vitamins and invigorate the rest of the day.</p>
+      </article>
+
+      <article class="skill-card">
+        <h3 class="skill-title">FAMILY RECIPE</h3>
+        <p class="skill-text">All our recipes are passed down from generation to generation for a long time.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- TIỆN ÍCH 3 & 4: VIDEO VÀ BÀI VIẾT (POST) -->
+  <section class="media-section" id="media">
+    <div class="section-title">
+      <span class="section-subtitle">Đa Phương Tiện</span>
+      <h2 class="section-heading">VIDEO & BÀI VIẾT</h2>
+    </div>
+
+    <div class="section-center media-grid">
+      <!-- Tiện ích 3: Video YouTube nhúng vào project -->
+      <div class="video-card">
+        <div class="video-wrap">
+          <iframe 
+            src="https://www.youtube.com/embed/5a2eS83a9v8" 
+            title="Video Nghệ Thuật Pha Trà" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+          </iframe>
+        </div>
+        <div class="video-details">
+          <span class="video-tag"><i class="fab fa-youtube"></i> Video Chính Thức</span>
+          <h3>Quy Trình Sấy Và Pha Trà Thượng Hạng</h3>
+          <p>Khám phá hành trình từ những búp trà xanh mướt trên đỉnh núi đến tách trà thơm ngát tại Tea Station.</p>
+        </div>
+      </div>
+
+      <!-- Tiện ích 4: Post mạng xã hội nhúng vào project -->
+      <div class="social-post-card">
+        <div class="post-header">
+          <div class="post-author">
+            <div class="author-avatar"><i class="fas fa-mug-hot"></i></div>
+            <div class="author-details">
+              <h4>Tea Station Vietnam</h4>
+              <span>Vừa đăng • <i class="fas fa-globe-asia"></i></span>
+            </div>
+          </div>
+          <i class="fab fa-facebook" style="color: #1877f2; font-size: 22px;"></i>
+        </div>
+
+        <div class="post-body">
+          <p>🌿 <strong>Ưu đãi đặc biệt:</strong> Thưởng thức dòng sản phẩm Black Long Tea và Green Tea With Jasmine với giá dùng thử chỉ từ $3.99!</p>
+          <p style="margin-top: 6px; color: #698238;">#TeaStation #SpecialtyTea #TràNgon</p>
+        </div>
+
+        <div class="post-img">
+          <img src="images/product-1.jpg" alt="Black Long Tea Promotion">
+        </div>
+
+        <div class="post-stats">
+          <span><i class="fas fa-thumbs-up" style="color: #1877f2;"></i> 482 lượt thích</span>
+          <span>95 bình luận • 42 chia sẻ</span>
+        </div>
+
+        <div class="post-action-bar">
+          <button class="post-action-btn"><i class="far fa-thumbs-up"></i> Thích</button>
+          <button class="post-action-btn"><i class="far fa-comment-alt"></i> Bình luận</button>
+          <button class="post-action-btn"><i class="far fa-share-square"></i> Chia sẻ</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIỆN ÍCH 5: COMMENT (BÌNH LUẬN) -->
+  <section class="comments-section" id="comments">
+    <div class="section-title">
+      <span class="section-subtitle">Đánh Giá</span>
+      <h2 class="section-heading">BÌNH LUẬN KHÁCH HÀNG</h2>
+    </div>
+
+    <div class="comments-box">
+      <div class="comments-title">
+        <span><i class="fas fa-comments" style="color: var(--primary-color);"></i> Ý Kiến & Bình Luận (<span id="totalNum">3</span>)</span>
+      </div>
+
+      <form class="comment-form" onsubmit="postComment(event)">
+        <div>
+          <input type="text" id="nameInput" class="comment-input" placeholder="Họ và tên của bạn..." required>
+        </div>
+        <div>
+          <input type="email" id="mailInput" class="comment-input" placeholder="Địa chỉ email..." required>
+        </div>
+        <div class="full">
+          <textarea id="msgInput" class="comment-input" rows="3" placeholder="Nhập nhận xét hoặc cảm nhận của bạn..." required></textarea>
+        </div>
+        <button type="submit" class="btn-comment">
+          <i class="fas fa-paper-plane"></i> GỬI BÌNH LUẬN
+        </button>
+      </form>
+
+      <div id="commentEntries">
+        <div class="comment-item">
+          <div class="comment-avatar">NV</div>
+          <div class="comment-bubble">
+            <div class="comment-meta">
+              <span class="author-name">Nguyễn Văn An</span>
+              <span class="time-stamp">10 phút trước</span>
+            </div>
+            <p>Trà đen thơm dịu, đóng gói rất cẩn thận và giao nhanh bất ngờ. Chắc chắn sẽ tiếp tục ủng hộ!</p>
+          </div>
+        </div>
+
+        <div class="comment-item">
+          <div class="comment-avatar">TL</div>
+          <div class="comment-bubble">
+            <div class="comment-meta">
+              <span class="author-name">Trần Thùy Linh</span>
+              <span class="time-stamp">1 giờ trước</span>
+            </div>
+            <p>Green Tea With Jasmine có mùi hoa lài tự nhiên không bị gắt, hậu vị ngọt sâu.</p>
+          </div>
+        </div>
+
+        <div class="comment-item">
+          <div class="comment-avatar">HM</div>
+          <div class="comment-bubble">
+            <div class="comment-meta">
+              <span class="author-name">Hoàng Minh</span>
+              <span class="time-stamp">Hôm qua</span>
+            </div>
+            <p>Slideshow đẹp mắt, video hướng dẫn pha trà rất chi tiết!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>&copy; 2026 <strong>Tea Station</strong>. Lab 7.2: Tích hợp tiện ích không cần viết code.</p>
+  </footer>
+
+  <!-- Swiper.js Script -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <script>
+    // 1. Khởi tạo Slideshow Swiper
+    new Swiper('.mySwiper', {
+      loop: true,
+      autoplay: { delay: 4000, disableOnInteraction: false },
+      pagination: { el: '.swiper-pagination', clickable: true },
+      navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+      effect: 'fade',
+      fadeEffect: { crossFade: true }
+    });
+
+    // 2. Tiện ích Nút Like
+    let liked = false;
+    let count = 1240;
+    function toggleLike() {
+      const btn = document.getElementById('likeBtn');
+      const countEl = document.getElementById('likeCount');
+      liked = !liked;
+      if (liked) {
+        count++;
+        btn.classList.add('liked');
+        btn.querySelector('span').innerText = 'Đã Thích';
+      } else {
+        count--;
+        btn.classList.remove('liked');
+        btn.querySelector('span').innerText = 'Thích';
+      }
+      countEl.innerText = count.toLocaleString();
+    }
+
+    // 3. Tiện ích Nút Share
+    let shares = 358;
+    function handleShare() {
+      shares++;
+      document.getElementById('shareCount').innerText = shares;
+      navigator.clipboard.writeText(window.location.href);
+      alert('Đã sao chép liên kết chia sẻ!');
+    }
+
+    // 4. Tiện ích Bình luận
+    function postComment(e) {
+      e.preventDefault();
+      const name = document.getElementById('nameInput').value.trim();
+      const msg = document.getElementById('msgInput').value.trim();
+      if (!name || !msg) return;
+
+      const initials = name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase() || 'KH';
+
+      const entry = document.createElement('div');
+      entry.className = 'comment-item';
+      entry.innerHTML = `
+        <div class="comment-avatar" style="background: #8fa758; color: #fff;">${initials}</div>
+        <div class="comment-bubble">
+          <div class="comment-meta">
+            <span class="author-name">${name}</span>
+            <span class="time-stamp">Vừa xong</span>
+          </div>
+          <p>${msg}</p>
+        </div>
+      `;
+
+      document.getElementById('commentEntries').prepend(entry);
+      const totalEl = document.getElementById('totalNum');
+      totalEl.innerText = parseInt(totalEl.innerText) + 1;
+
+      document.getElementById('nameInput').value = '';
+      document.getElementById('mailInput').value = '';
+      document.getElementById('msgInput').value = '';
+    }
+  </script>
+
+</body>
+</html>

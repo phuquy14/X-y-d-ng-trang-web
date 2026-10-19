@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tea Station | Lab 8.1 - Bản Đồ, YouTube & Lightbox</title>
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Fonts: Catamaran & Grand Hotel & Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@400;600;700;800&family=Grand+Hotel&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- GLightbox CSS (Thư viện Lightbox xem ảnh lớn không cần code) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.3.0/css/glightbox.min.css" />
+
+  <!-- Leaflet Map CSS (Bản đồ tương tác khớp với hình mẫu de3) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <style>
+    :root {
+      --primary-color: #698238;
+      --primary-hover: #556c2c;
+      --dark-color: #242424;
+      --slate-dark: #25282a;
+      --white: #ffffff;
+      --font-title: 'Catamaran', sans-serif;
+      --font-body: 'Montserrat', sans-serif;
+      --font-script: 'Grand Hotel', cursive;
+      --transition: all 0.3s ease;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--font-body); background: var(--white); color: var(--dark-color); line-height: 1.6; }
+    a { text-decoration: none; color: inherit; }
+    img { width: 100%; display: block; object-fit: cover; }
+
+    .section-center { width: 90vw; max-width: 1170px; margin: 0 auto; }
+    .section-title { text-align: center; margin-bottom: 2.5rem; }
+    .section-subtitle { font-family: var(--font-script); font-size: 2.3rem; color: var(--primary-color); display: block; }
+    .section-heading { font-family: var(--font-title); font-size: 2rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--dark-color); }
+
+    /* Hero Banner */
+    .hero-banner {
+      min-height: 60vh;
+      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.6)), url('images/hero-bg.jpg') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 1.5rem;
+      color: #fff;
+    }
+
+    .hero-subtitle { font-family: var(--font-script); font-size: 3rem; color: #a3c75d; margin-bottom: 0.5rem; }
+    .hero-title { font-family: var(--font-title); font-size: 3rem; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 1.5rem; }
+    .hero-btn {
+      display: inline-block; font-family: var(--font-title); font-size: 1.1rem; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: #fff; background: var(--primary-color); border: 2px solid #8fa758;
+      padding: 0.75rem 2.2rem; border-radius: 4px; transition: var(--transition);
+    }
+    .hero-btn:hover { background: var(--primary-hover); }
+
+    /* ==========================================================
+       YÊU CẦU 1: LIGHTBOX CHO SẢN PHẨM & DỊCH VỤ
+       ========================================================== */
+    .products-section {
+      padding: 5rem 0;
+      background: var(--slate-dark);
+      color: var(--white);
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr 1.2fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+
+    .products-info .section-subtitle { text-align: left; color: #a3c75d; }
+    .products-info .section-heading { text-align: left; color: var(--white); margin-bottom: 1.2rem; }
+    .products-info p { color: #cbd5e1; font-size: 0.95rem; line-height: 1.8; margin-bottom: 1.5rem; }
+
+    .product-card {
+      border-bottom: 3px solid var(--primary-color);
+      padding-bottom: 1.2rem;
+      transition: var(--transition);
+    }
+
+    .product-img-wrap {
+      border-radius: 18px;
+      overflow: hidden;
+      margin-bottom: 1.2rem;
+      position: relative;
+      cursor: pointer;
+      display: block;
+    }
+
+    .product-img-wrap img {
+      height: 220px;
+      transition: transform 0.4s ease;
+    }
+
+    .product-img-wrap:hover img {
+      transform: scale(1.08);
+    }
+
+    .lightbox-hover-icon {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: var(--transition);
+      color: #fff;
+      font-size: 28px;
+    }
+
+    .product-img-wrap:hover .lightbox-hover-icon {
+      opacity: 1;
+    }
+
+    .product-name {
+      font-family: var(--font-title);
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      color: var(--white);
+    }
+
+    .product-price {
+      font-family: var(--font-title);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #9ecc52;
+    }
+
+    /* SERVICES LIGHTBOX */
+    .services-section {
+      padding: 5rem 0;
+      background: #f1f5f8;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .service-card {
+      background: var(--white);
+      border-radius: 26px;
+      overflow: hidden;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+      border: 4px solid #fff;
+      outline: 2px solid #b5cc8a;
+      transition: var(--transition);
+    }
+
+    .service-card:hover { transform: translateY(-6px); }
+
+    .service-img-wrap {
+      height: 240px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      display: block;
+    }
+
+    .service-img-wrap:hover .lightbox-hover-icon { opacity: 1; }
+
+    .service-bottom {
+      background: var(--primary-color);
+      padding: 2.2rem 1.5rem;
+      text-align: center;
+      color: var(--white);
+    }
+
+    .service-title {
+      font-family: var(--font-title);
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: capitalize;
+    }
+
+    /* ==========================================================
+       YÊU CẦU 2: VIDEO YOUTUBE
+       ========================================================== */
+    .youtube-section {
+      padding: 5rem 0;
+      background: #fff;
+    }
+
+    .youtube-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #f8fafc;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+      border: 1px solid #e2e8f0;
+    }
+
+    .youtube-wrap {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 */
+      height: 0;
+      overflow: hidden;
+    }
+
+    .youtube-wrap iframe {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%; border: 0;
+    }
+
+    .youtube-meta {
+      padding: 22px 26px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    /* ==========================================================
+       YÊU CẦU 3: BẢN ĐỒ MAP (CHÍNH XÁC THEO ẢNH ĐỀ 3)
+       ========================================================== */
+    .map-section {
+      padding: 5rem 0 2rem;
+      background: #ffffff;
+    }
+
+    .map-frame-box {
+      border: 8px solid #5d7c2a;
+      border-radius: 36px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(93, 124, 42, 0.25);
+      position: relative;
+      height: 480px;
+      background: #e5e3df;
+    }
+
+    #teaMap {
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    /* Custom popup Leaflet marker */
+    .leaflet-popup-content-wrapper {
+      border-radius: 8px;
+      padding: 4px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    /* ==========================================================
+       FOOTER (CHÍNH XÁC THEO ẢNH DE3 IMAGE1.PNG)
+       ========================================================== */
+    .footer-exact-de3 {
+      background: #343735;
+      color: #ffffff;
+      padding: 3.5rem 0;
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    .footer-exact-de3 .social-icons-row {
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    .social-btn-box {
+      width: 38px;
+      height: 38px;
+      background: #fff;
+      color: #343735;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      border-radius: 3px;
+      transition: var(--transition);
+    }
+
+    .social-btn-box:hover {
+      background: var(--primary-color);
+      color: #fff;
+    }
+
+    .footer-copyright-text {
+      font-size: 15px;
+      color: #d1d5db;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    .footer-copyright-text .green-highlight {
+      color: #799a38;
+      font-weight: 700;
+    }
+
+    @media (max-width: 992px) {
+      .products-grid, .services-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO BANNER -->
+  <header class="hero-banner">
+    <div>
+      <h3 class="hero-subtitle">Over one hundred flavors of tea</h3>
+      <h1 class="hero-title">TEA STATION SPECIALTY</h1>
+      <a href="#map-area" class="hero-btn"><i class="fas fa-map-pin"></i> VỊ TRÍ QUÁN TRÊN BẢN ĐỒ</a>
+    </div>
+  </header>
+
+  <!-- PRODUCTS VỚI LIGHTBOX -->
+  <section class="products-section" id="products">
+    <div class="section-center products-grid">
+      <div class="products-info">
+        <span class="section-subtitle">Check Out</span>
+        <h2 class="section-heading">OUR PRODUCTS</h2>
+        <p>
+          Nhấp chuột vào từng ảnh sản phẩm để phóng to chi tiết màu nước trà và bao bì đóng gói chất lượng cao bằng thư viện Lightbox.
+        </p>
+      </div>
+
+      <!-- Sản phẩm 1 -->
+      <article class="product-card">
+        <a href="images/product-1.jpg" class="glightbox product-img-wrap" data-gallery="products" data-title="Black Long Tea - $3.99" data-description="Trà đen truyền thống tuyển chọn vụ xuân.">
+          <img src="images/product-1.jpg" alt="Black Long Tea">
+          <div class="lightbox-hover-icon"><i class="fas fa-expand"></i></div>
+        </a>
+        <h3 class="product-name">BLACK LONG TEA</h3>
+        <span class="product-price">$ 3.99</span>
+      </article>
+
+      <!-- Sản phẩm 2 -->
+      <article class="product-card">
+        <a href="images/product-2.jpg" class="glightbox product-img-wrap" data-gallery="products" data-title="Green Tea With Jasmine - $4.99" data-description="Trà xanh ướp hoa lài tươi nguyên bông hữu cơ.">
+          <img src="images/product-2.jpg" alt="Green Tea With Jasmine">
+          <div class="lightbox-hover-icon"><i class="fas fa-expand"></i></div>
+        </a>
+        <h3 class="product-name">GREEN TEA WITH JASMINE</h3>
+        <span class="product-price">$ 4.99</span>
+      </article>
+    </div>
+  </section>
+
+  <!-- SERVICES VỚI LIGHTBOX -->
+  <section class="services-section">
+    <div class="section-title">
+      <span class="section-subtitle">Explore</span>
+      <h2 class="section-heading">OUR SERVICES</h2>
+    </div>
+
+    <div class="section-center services-grid">
+      <article class="service-card">
+        <a href="images/service-1.jpg" class="glightbox service-img-wrap" data-gallery="services" data-title="Custom Recipe Service" data-description="Pha chế theo gu thưởng thức riêng của khách hàng.">
+          <img src="images/service-1.jpg" alt="Custom Recipe Service">
+          <div class="lightbox-hover-icon"><i class="fas fa-search-plus"></i></div>
+        </a>
+        <div class="service-bottom">
+          <h3 class="service-title">Custom Recipe Service</h3>
+        </div>
+      </article>
+
+      <article class="service-card">
+        <a href="images/service-2.jpg" class="glightbox service-img-wrap" data-gallery="services" data-title="Home Delivery Service" data-description="Giao trà nhanh tận nhà bảo toàn độ tươi mới.">
+          <img src="images/service-2.jpg" alt="Home Delivery Service">
+          <div class="lightbox-hover-icon"><i class="fas fa-search-plus"></i></div>
+        </a>
+        <div class="service-bottom">
+          <h3 class="service-title">Home Delivery Service</h3>
+        </div>
+      </article>
+
+      <article class="service-card">
+        <a href="images/service-3.jpg" class="glightbox service-img-wrap" data-gallery="services" data-title="Tea Aging Service" data-description="Kỹ thuật ủ trà lâu năm trong chum đất nung.">
+          <img src="images/service-3.jpg" alt="Tea Aging Service">
+          <div class="lightbox-hover-icon"><i class="fas fa-search-plus"></i></div>
+        </a>
+        <div class="service-bottom">
+          <h3 class="service-title">Tea Aging Service</h3>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- YOUTUBE VIDEO -->
+  <section class="youtube-section" id="youtube">
+    <div class="section-title">
+      <span class="section-subtitle">Video Trà Đạo</span>
+      <h2 class="section-heading">NGHỆ THUẬT PHA CHẾ</h2>
+    </div>
+
+    <div class="section-center youtube-container">
+      <div class="youtube-wrap">
+        <iframe 
+          src="https://www.youtube.com/embed/5a2eS83a9v8" 
+          title="Nghệ thuật pha trà đạo Tea Station" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen>
+        </iframe>
+      </div>
+      <div class="youtube-meta">
+        <div>
+          <h3 style="font-size: 18px; margin-bottom: 4px;">Quy Trình Thu Hái Và Chế Biến Trà Cổ Truyền</h3>
+          <p style="font-size: 13.5px; color: #64748b;">Khám phá tinh hoa làm nên hương vị trà đặc biệt tại Tea Station.</p>
+        </div>
+        <a href="https://youtube.com" target="_blank" style="padding: 10px 20px; background: #dc2626; color: #fff; border-radius: 6px; font-weight: 700; font-size: 13px; display: inline-flex; align-items: center; gap: 8px;">
+          <i class="fab fa-youtube"></i> Xem Trên YouTube
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BẢN ĐỒ MAP (CHÍNH XÁC THEO MẪU DE3) -->
+  <section class="map-section" id="map-area">
+    <div class="section-center">
+      <div class="map-frame-box">
+        <div id="teaMap"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER (CHÍNH XÁC THEO ẢNH IMAGE1.PNG TRONG DE3) -->
+  <footer class="footer-exact-de3">
+    <div class="social-icons-row">
+      <a href="#" class="social-btn-box" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" class="social-btn-box" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+      <a href="#" class="social-btn-box" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+    </div>
+    <p class="footer-copyright-text">
+      &copy; 2021 <span class="green-highlight">TEA STATION</span> . Designed by <span class="green-highlight">JOHN SMILGA</span> . Coded by <span class="green-highlight">ANTON ZHIRKOV</span> in learning purposes only.
+    </p>
+  </footer>
+
+  <!-- GLightbox Script -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.3.0/js/glightbox.min.js"></script>
+
+  <!-- Leaflet Map Script -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>
+    // 1. Kích hoạt Lightbox
+    const lightbox = GLightbox({
+      touchNavigation: true,
+      loop: true,
+      autoplayVideos: true
+    });
+
+    // 2. Khởi tạo Bản đồ Leaflet Map đúng tọa độ Suncrest Road & popup "Here we are"
+    const lat = 34.0837;
+    const lng = -118.3614;
+
+    const map = L.map('teaMap', {
+      center: [lat, lng],
+      zoom: 16,
+      zoomControl: true,
+      scrollWheelZoom: false
+    });
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; Leaflet | &copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    const marker = L.marker([lat, lng]).addTo(map);
+    marker.bindPopup('<strong>Here we are</strong><br>Tea Station Store').openPopup();
+  </script>
+
+</body>
+</html>
